@@ -12,7 +12,11 @@
 <meta property="og:description" content="5つの質問で睡眠タイプを診断。枕・マットレス・快眠グッズを「向かない人」まで正直に紹介します。">
 <meta property="og:url" content="https://somni.sanji-104vt.workers.dev/">
 <meta property="og:site_name" content="Somni">
+<meta property="og:image" content="https://somni.sanji-104vt.workers.dev/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://somni.sanji-104vt.workers.dev/ogp.png">
 <meta name="theme-color" content="#12162e">
 
 <!-- Google tag (gtag.js) -->
@@ -175,6 +179,11 @@ header{
 .result-note{font-size:.78rem;color:var(--lavender);margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
 .restart{background:none;border:none;color:var(--lavender);text-decoration:underline;cursor:pointer;font-size:.82rem;margin-top:14px}
 
+.share-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+.share-label{font-size:.78rem;color:var(--lavender);letter-spacing:.1em}
+.share-btn{font-family:var(--sans);font-size:.8rem;border:1px solid var(--line);background:transparent;color:var(--moon);padding:7px 18px;border-radius:999px;text-decoration:none;cursor:pointer;transition:border-color .15s,color .15s}
+.share-btn:hover,.share-btn:focus-visible{border-color:var(--amber);color:var(--amber-soft)}
+
 /* ===== products ===== */
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 8px}
 .filters button{
@@ -286,7 +295,7 @@ footer .logo{font-size:1.05rem}
 <section id="products" aria-label="快眠グッズ一覧">
   <div class="wrap">
     <span class="eyebrow">Honest Picks</span>
-    <h2>快眠グッズ 24選 —「向かない人」まで書きます</h2>
+    <h2>快眠グッズ 83選 —「向かない人」まで書きます</h2>
     <p class="lead">全部をおすすめはしません。どんな道具にも、合う人と合わない人がいます。各カードの下段に「こういう人には向かない」を必ず書いています。価格は目安です(変動します)。</p>
     <div class="filters" id="filters" role="group" aria-label="カテゴリ絞り込み"></div>
     <p class="tag-note" id="tagNote"></p>
@@ -474,20 +483,213 @@ const PRODUCTS = [
  notFor:"心拍系の詳細データはウォッチ型に劣る。運動記録も兼ねたい人はFitbit系へ。"},
 {cat:"スリープテック", name:"チチロバ 温度調整掛け布団", brand:"TITIROBA", price:"約8,000円", tags:["暑さ"], keyword:"チチロバ 掛け布団",
  good:"通気性重視の掛け布団。「重い羽毛で暑くて起きる」人の乗り換え先として価格が現実的。",
- notFor:"真冬の保温力は羽毛に劣る。寒がりの人は冬用との2枚体制が前提になる。"}
+ notFor:"真冬の保温力は羽毛に劣る。寒がりの人は冬用との2枚体制が前提になる。"},
+
+// --- 枕(追加) ---
+{cat:"枕", name:"エアウィーヴ ピロー S-LINE", brand:"airweave", price:"約17,000円", tags:["肩首","暑さ"], keyword:"エアウィーヴ ピロー S-LINE",
+ good:"中材まで丸洗いできる通気素材。シートで高さ調整ができ、頭に熱がこもりにくい。",
+ notFor:"ふんわり沈む柔らかさを求める人には反発が強く感じやすい。枕としては高価格帯。"},
+{cat:"枕", name:"トゥルースリーパー セブンスピロー", brand:"ショップジャパン", price:"約16,000円", tags:["肩首"], keyword:"トゥルースリーパー セブンスピロー",
+ good:"肩口まで覆う大型低反発で、首だけでなく背中上部ごと支える設計。仰向け中心の人向け。",
+ notFor:"サイズが大きく寝返りの自由度は下がる。暑がりの人は低反発特有の蓄熱が気になりやすい。"},
+{cat:"枕", name:"西川 エアー3Dピロー", brand:"西川", price:"約10,000円", tags:["肩首"], keyword:"西川 エアー3D ピロー",
+ good:"凹凸構造で頭圧を分散しつつ通気を確保。エアーシリーズのマットレスと揃えやすい。",
+ notFor:"柔らかい羽根枕からの乗り換えだと硬く感じやすい。高さの微調整はしにくい。"},
+{cat:"枕", name:"ニトリ ホテルスタイル枕 プレミアム", brand:"ニトリ", price:"約3,000円", tags:["寝つき"], keyword:"ニトリ ホテルスタイル枕 プレミアム",
+ good:"ふんわり包まれる感触をこの価格で試せる定番。まず柔らかめが好きか確かめる入門用に。",
+ notFor:"支持力は高くないので、首や肩の支えを求める人には物足りない。へたりも早め。"},
+{cat:"枕", name:"GOKUMIN 低反発枕", brand:"GOKUMIN", price:"約4,000円", tags:["肩首"], keyword:"GOKUMIN 低反発枕",
+ good:"高さ調整シート付きで、自分の合う高さを探る練習台として優秀な価格帯。",
+ notFor:"硬めの高反発が好きな人には合わない。素材のにおいが抜けるまで数日かかることがある。"},
+{cat:"枕", name:"昭和西川 ギガ枕", brand:"昭和西川", price:"約11,000円", tags:["肩首","朝つらい"], keyword:"昭和西川 ギガ枕",
+ good:"約90cm幅の超大型で、頭から背中上部まで面で支える発想の枕。",
+ notFor:"シングルベッドだと枕だけでかなりの面積を占有する。普通サイズの枕カバーは使えない。"},
+{cat:"枕", name:"モットン枕(高反発)", brand:"モットン", price:"約18,000円", tags:["肩首"], keyword:"モットン 枕 高反発",
+ good:"高反発で沈み込みを抑え、付属シートで高さを細かく調整できる。",
+ notFor:"柔らかい枕が好きな人には不向き。返品には条件があるので購入前に規約の確認を。"},
+{cat:"枕", name:"王様の夢枕", brand:"ビーチ", price:"約7,000円", tags:["寝つき"], keyword:"王様の夢枕",
+ good:"極小ビーズのムニュっとした独特の感触。感触の心地よさで選ぶタイプの枕。",
+ notFor:"しっかりした支持力はないため、首や肩の支え目的の人には合わない。好みが分かれる感触。"},
+
+// --- マットレス(追加) ---
+{cat:"マットレス", name:"モットン マットレス", brand:"モットン", price:"約40,000円", tags:["肩首","朝つらい"], keyword:"モットン マットレス",
+ good:"高反発ウレタンで硬さを3種類から体重に合わせて選べるのが特徴。",
+ notFor:"包まれる柔らかさを求める人には不向き。返金保証には期間・条件の指定があるため必ず事前確認を。"},
+{cat:"マットレス", name:"雲のやすらぎプレミアム", brand:"イッティ", price:"約40,000円", tags:["肩首"], keyword:"雲のやすらぎプレミアム",
+ good:"厚さ17cmの敷布団タイプで、床に直接敷く和室スタイルの人が選びやすい。",
+ notFor:"重量があり毎日の上げ下ろしは大変。床置きは湿気がこもりやすく、すのこ等の対策が前提。"},
+{cat:"マットレス", name:"エアウィーヴ スマートZ01", brand:"airweave", price:"約50,000円", tags:["暑さ","中途覚醒"], keyword:"エアウィーヴ スマートZ01",
+ good:"中材まで洗える通気素材で、三つ折りで押し入れに収納できる。暑さで起きる人向きの素材。",
+ notFor:"柔らかい寝心地が好きな人には硬く感じやすい。冬は素材の通気性がそのまま寒さになることも。"},
+{cat:"マットレス", name:"西川 エアー01", brand:"西川", price:"約50,000円", tags:["肩首"], keyword:"西川 エアー01 マットレス",
+ good:"点で支える凹凸ウレタンの定番。既存の敷布団の上に重ねるトッパー的な使い方もできる。",
+ notFor:"単体で床に敷くには厚みが心もとない。ベースとなる寝具がへたっていると効果が出にくい。"},
+{cat:"マットレス", name:"ソムレスタ", brand:"SOMRESTA", price:"約50,000円", tags:["肩首"], keyword:"ソムレスタ マットレス",
+ good:"高密度ウレタンで耐久性重視の国産設計。三つ折り収納にも対応。",
+ notFor:"ウレタン系共通で通気は苦手。暑がりの人は除湿シート等の併用が前提になる。"},
+{cat:"マットレス", name:"LIMNE(リムネ)", brand:"LIMNE", price:"約80,000円", tags:["寝つき"], keyword:"LIMNE マットレス",
+ good:"マシュマロのような柔らかさが特徴で、包まれる感覚が好きな人向けの設計。120日トライアルあり。",
+ notFor:"体重が重めの人は沈み込みが深くなりやすい。硬めでしっかり支えてほしい人には正反対の選択。"},
+{cat:"マットレス", name:"ニトリ Nスリープ プレミアム", brand:"ニトリ", price:"約60,000円", tags:["中途覚醒"], keyword:"ニトリ Nスリープ プレミアム",
+ good:"全国の店舗で実際に寝転んで試せるのが通販系にない最大の強み。",
+ notFor:"搬入は大型家具扱いになるため、エレベーターなし物件は事前に搬入経路の確認を。"},
+{cat:"マットレス", name:"アイリスオーヤマ エアリーマットレス", brand:"アイリスオーヤマ", price:"約15,000円", tags:["暑さ","中途覚醒"], keyword:"アイリスオーヤマ エアリーマットレス",
+ good:"中材ごと洗える通気素材をこの価格で試せる。夏場の蒸れ対策の入門機。",
+ notFor:"厚さが薄めのタイプは体重が重い人だと底付き感が出やすい。単体使いより重ね使い向き。"},
+
+// --- 寝具・リカバリー(追加) ---
+{cat:"寝具・リカバリー", name:"VENEX リカバリーウェア", brand:"VENEX", price:"約15,000円", tags:["朝つらい"], keyword:"VENEX リカバリーウェア",
+ good:"リカバリーウェアの草分け的ブランド。ゆったりした着心地で休養時間用の設計。",
+ notFor:"着るだけで疲れが消える魔法の服ではない。効果を数値で確かめたい人には向かない買い物。"},
+{cat:"寝具・リカバリー", name:"SIXPAD リカバリーウェア", brand:"MTG", price:"約20,000円", tags:["朝つらい"], keyword:"SIXPAD リカバリーウェア",
+ good:"一般医療機器届出のリカバリーウェア。スポーツ後の休養と就寝を兼ねたい人向け。",
+ notFor:"パジャマとしては高価格帯。まず1着で体感を確かめてから上下揃えるのが無難。"},
+{cat:"寝具・リカバリー", name:"ニトリ 重い毛布", brand:"ニトリ", price:"約5,000円", tags:["寝つき"], keyword:"ニトリ 重い毛布",
+ good:"加重ブランケットをこの価格で試せる。「重みで落ち着く」感覚が自分に合うかの確認用に最適。",
+ notFor:"暑がりの人・寝返りが多い人には重さがそのまま負担になる。夏場はほぼ出番がない。"},
+{cat:"寝具・リカバリー", name:"無印良品 脇に縫い目のないパジャマ", brand:"無印良品", price:"約4,000円", tags:["寝つき"], keyword:"無印良品 脇に縫い目のない パジャマ",
+ good:"縫い目の当たりを減らした設計。部屋着と寝間着を分けて「着替え=就寝の合図」を作る第一歩に。",
+ notFor:"機能性素材のような温度調整はない。汗かきの人は夏用素材を別途選ぶ必要がある。"},
+{cat:"寝具・リカバリー", name:"今治タオルケット", brand:"今治タオル", price:"約5,000円", tags:["暑さ"], keyword:"今治タオルケット",
+ good:"吸水性の高いコットンで、夏の寝汗のべたつき対策の定番。洗うほどなじむ。",
+ notFor:"接触冷感のようなひんやり感はない。冷たさを求めるならNクール系と使い分けを。"},
+{cat:"寝具・リカバリー", name:"昭和西川 ホワイトダック羽毛布団", brand:"昭和西川", price:"約20,000円", tags:["冷え","中途覚醒"], keyword:"昭和西川 羽毛布団 ホワイトダック",
+ good:"寒さで夜中に目が覚める人の基本装備。軽さと保温のバランスで化繊布団と体感差が出やすい。",
+ notFor:"羽毛アレルギーの人は不可。梅雨時の手入れ(陰干し)を面倒がる人は化繊の方が現実的。"},
+{cat:"寝具・リカバリー", name:"パシーマ キルトケット", brand:"龍宮", price:"約8,000円", tags:["暑さ","冷え"], keyword:"パシーマ キルトケット",
+ good:"ガーゼと脱脂綿の構造で、夏は汗を吸い冬は空気をためる。オールシーズン1枚で回せる。",
+ notFor:"見た目は簡素で、ホテルライクな寝室の雰囲気を重視する人には味気なく映る。"},
+{cat:"寝具・リカバリー", name:"fashy 湯たんぽ", brand:"fashy", price:"約3,000円", tags:["冷え","寝つき"], keyword:"fashy 湯たんぽ",
+ good:"ドイツ製のやわらかい湯たんぽ。足元の冷えで寝つけない人の電気を使わない定番解。",
+ notFor:"お湯の入れ替えを毎晩やるのが面倒な人は電気毛布系の方が続く。低温やけど防止にカバー必須。"},
+{cat:"寝具・リカバリー", name:"王様の足枕", brand:"ビーチ", price:"約4,000円", tags:["朝つらい"], keyword:"王様の足枕",
+ good:"足を少し高くして休む姿勢を作るクッション。立ち仕事で脚が重い日の休息用に。",
+ notFor:"寝返りで足から外れやすく、朝まで同じ位置にはまず残らない。入眠時専用と割り切る道具。"},
+
+// --- 光と環境(追加) ---
+{cat:"光と環境", name:"YABAE 光目覚まし時計", brand:"YABAE", price:"約5,000円", tags:["朝つらい"], keyword:"YABAE 光目覚まし時計",
+ good:"光目覚ましを5千円台で試せる入門機。高級機を買う前に「光で起きられるか」の検証用に。",
+ notFor:"光量は上位機に劣るため、遮光カーテンで真っ暗にした部屋での補助光と考えるのが現実的。"},
+{cat:"光と環境", name:"SwitchBot シーリングライト", brand:"SwitchBot", price:"約7,000円", tags:["寝つき","朝つらい"], keyword:"SwitchBot シーリングライト",
+ good:"就寝前の減光と起床時の点灯をスケジュール自動化できる。SwitchBot製品群との連携も可能。",
+ notFor:"アプリでの初期設定が必要。スマート家電の設定を面倒に感じる人には普通の調光リモコン機で十分。"},
+{cat:"光と環境", name:"アイリスオーヤマ LEDシーリング 調光調色", brand:"アイリスオーヤマ", price:"約8,000円", tags:["寝つき"], keyword:"アイリスオーヤマ LEDシーリングライト 調光調色",
+ good:"夜は電球色に落とす、をリモコン1つでできる基本装備。寝室の照明が昼白色のままの人へ。",
+ notFor:"自動化はできないので、毎晩の切り替えを忘れがちな人はスマート照明の方が続く。"},
+{cat:"光と環境", name:"象印 スチーム式加湿器", brand:"象印", price:"約15,000円", tags:["中途覚醒"], keyword:"象印 スチーム式加湿器",
+ good:"構造がポットと同じで手入れが圧倒的に楽。冬の乾燥で喉が痛くて目が覚める人の定番。",
+ notFor:"電気代はスチーム式ゆえ高め。沸騰音が就寝時に気になる人は気化式を検討。"},
+{cat:"光と環境", name:"SwitchBot 温湿度計", brand:"SwitchBot", price:"約2,000円", tags:["記録","暑さ"], keyword:"SwitchBot 温湿度計",
+ good:"寝室の温湿度をアプリで記録できる。「夜中に暑くて起きる」の原因特定にまず置く測定器。",
+ notFor:"測るだけでは何も変わらない。エアコン自動化まで進めるならハブとのセット購入が前提。"},
+{cat:"光と環境", name:"アイリスオーヤマ サーキュレーター", brand:"アイリスオーヤマ", price:"約6,000円", tags:["暑さ"], keyword:"アイリスオーヤマ サーキュレーター 静音",
+ good:"エアコンの冷気を循環させ、設定温度を下げすぎずに寝室の温度ムラを減らす。静音モデルを選ぶこと。",
+ notFor:"風が直接体に当たる配置だと逆に眠りが浅くなりやすい。壁や天井に向けて使う前提の道具。"},
+{cat:"光と環境", name:"突っ張り式遮光ロールスクリーン", brand:"各社", price:"約4,000円", tags:["中途覚醒","朝つらい"], keyword:"突っ張り 遮光 ロールスクリーン",
+ good:"穴あけ不要で賃貸でも窓の光漏れを塞げる。カーテン上下の隙間光対策にも。",
+ notFor:"完全遮光にはならず隙間は残る。1級遮光カーテンとの併用で考える補助装備。"},
+{cat:"光と環境", name:"足元灯(人感センサーナイトライト)", brand:"各社", price:"約2,000円", tags:["中途覚醒"], keyword:"人感センサー ナイトライト 足元灯",
+ good:"夜中のトイレで天井灯をつけて完全に目が覚める、を防ぐ暗めの足元照明。",
+ notFor:"センサーの反応範囲が広すぎると逆に光で起こされる。設置場所の調整が必要。"},
+
+// --- 音と香り(追加) ---
+{cat:"音と香り", name:"Anker Soundcore Sleep A20", brand:"Anker", price:"約20,000円", tags:["寝つき","中途覚醒"], keyword:"Anker Soundcore Sleep A20",
+ good:"横向き寝でも耳が痛くなりにくい睡眠特化イヤホン。隣のいびきをホワイトノイズでマスキングする用途に。",
+ notFor:"耳に何か入れて眠ること自体が苦手な人には根本的に合わない。まず安い耳栓で耐性確認を。"},
+{cat:"音と香り", name:"MOLDEX 耳栓 お試し8種", brand:"MOLDEX", price:"約1,000円", tags:["中途覚醒"], keyword:"MOLDEX 耳栓 お試し",
+ good:"硬さ・形の違う8種を試して自分の耳に合う1つを見つけるセット。耳栓選びはここから始めるのが正解。",
+ notFor:"使い捨て前提なのでランニングコストはかかる。繰り返し使いたい人は洗えるタイプへ。"},
+{cat:"音と香り", name:"サイレンシア レギュラー", brand:"DKSH", price:"約700円", tags:["中途覚醒"], keyword:"サイレンシア 耳栓",
+ good:"ドラッグストアで買える定番フォーム耳栓。今夜すぐ試せる即効性が最大の価値。",
+ notFor:"フィット感には個人差が大きい。合わなければMOLDEXのお試しセットで探し直しを。"},
+{cat:"音と香り", name:"無印良品 超音波うるおいアロマディフューザー", brand:"無印良品", price:"約5,000円", tags:["寝つき"], keyword:"無印良品 超音波うるおいアロマディフューザー",
+ good:"タイマー付きで消し忘れの心配がない定番機。「香り=就寝の合図」の習慣化装置として。",
+ notFor:"加湿器の代わりにはならない。水の入れ替えと手入れを怠るとかえって不衛生になる。"},
+{cat:"音と香り", name:"生活の木 ラベンダー精油", brand:"生活の木", price:"約2,000円", tags:["寝つき"], keyword:"生活の木 ラベンダー 精油",
+ good:"夜の香りの定番。ディフューザーがなくてもティッシュに1滴垂らして枕元に置くだけで試せる。",
+ notFor:"香りの好みは眠気より優先される。ラベンダーが好きでないなら無理に使う意味はない。"},
+{cat:"音と香り", name:"日本香堂 かゆらぎ お香", brand:"日本香堂", price:"約1,000円", tags:["寝つき"], keyword:"かゆらぎ お香",
+ good:"就寝1時間前に焚き終える使い方で、部屋の空気ごと夜モードに切り替える。火を使う分、儀式感が強い。",
+ notFor:"就寝中の使用は火気の面で不可。煙が苦手な人・ペットのいる家庭は精油系へ。"},
+{cat:"音と香り", name:"ポンパドール カモミールティー", brand:"ポンパドール", price:"約500円", tags:["寝つき"], keyword:"ポンパドール カモミール",
+ good:"夜の温かい飲み物の定番ハーブティー。「寝る前の一杯」の習慣づくりのコストが最も低い選択肢。",
+ notFor:"キク科アレルギーの人は避けること。飲めば眠くなる薬ではなく、あくまで習慣の道具。"},
+{cat:"音と香り", name:"AGF カフェインレスコーヒー", brand:"AGF", price:"約800円", tags:["寝つき"], keyword:"AGF ちょっと贅沢な珈琲店 カフェインレス",
+ good:"夕方以降のコーヒーをやめられない人の置き換え先。味を保ったまま夜のカフェインを減らせる。",
+ notFor:"カフェインが完全にゼロではない製品もある。敏感な人は表示の確認を。"},
+
+// --- スリープテック(追加) ---
+{cat:"スリープテック", name:"Xiaomi Smart Band 9", brand:"Xiaomi", price:"約6,000円", tags:["記録","朝つらい"], keyword:"Xiaomi Smart Band9",
+ good:"睡眠記録の入門として最安クラス。就寝時刻のばらつきを可視化する最初の一歩に。",
+ notFor:"計測精度を突き詰めたい人には物足りない。まず「記録が続くか」を試す道具と考える。"},
+{cat:"スリープテック", name:"HUAWEI Band 9", brand:"HUAWEI", price:"約8,000円", tags:["記録"], keyword:"HUAWEI Band9",
+ good:"軽量で装着感が薄く、着けたまま眠るのが苦にならない部類。睡眠分析機能も一通り揃う。",
+ notFor:"スマホのOSによっては連携機能に制限がある。購入前に自分の機種との対応確認を。"},
+{cat:"スリープテック", name:"Oura Ring", brand:"Oura", price:"約50,000円", tags:["記録"], keyword:"Oura Ring",
+ good:"指輪型で就寝中の装着感が最小。手首に何か着けるのが無理な人の最終手段。",
+ notFor:"本体価格に加えサブスク費用がかかる。サイズ選びも必要で、気軽に試す価格帯ではない。"},
+{cat:"スリープテック", name:"Withings Sleep", brand:"Withings", price:"約17,000円", tags:["記録","いびき"], keyword:"Withings Sleep",
+ good:"マットレスの下に敷くセンサーで、何も装着せずに睡眠といびき傾向を記録できる。",
+ notFor:"2人で寝ているベッドでは自分のデータだけを正確に取るのが難しい。一人寝の環境向き。"},
+{cat:"スリープテック", name:"Google Nest Hub(第2世代)", brand:"Google", price:"約10,000円", tags:["記録","朝つらい"], keyword:"Google Nest Hub 第2世代",
+ good:"非接触センサーで睡眠を計測でき、光が徐々に明るくなる目覚まし表示も使える。",
+ notFor:"枕元に画面のあるデバイスを置くこと自体が刺激になる人には本末転倒。通知設定の管理が前提。"},
+{cat:"スリープテック", name:"Nature Remo mini 2", brand:"Nature", price:"約6,000円", tags:["暑さ"], keyword:"Nature Remo mini2",
+ good:"温度に応じてエアコンを自動オンオフできるスマートリモコン。夜中の暑さ・寒さ対策の自動化に。",
+ notFor:"赤外線リモコンのないエアコンは操作不可。設定の手間を面倒がる人はタイマー運転で十分。"},
+{cat:"スリープテック", name:"Apple Watch SE", brand:"Apple", price:"約40,000円", tags:["記録"], keyword:"Apple Watch SE",
+ good:"iPhoneユーザーなら睡眠記録と振動アラームが最も自然に使える選択肢。",
+ notFor:"ほぼ毎日の充電が必要で、充電タイミングの管理が続かない人は記録が穴だらけになる。"},
+{cat:"スリープテック", name:"パナソニック 目もとエステ", brand:"パナソニック", price:"約20,000円", tags:["寝つき"], keyword:"パナソニック 目もとエステ",
+ good:"蒸気とリズムで目元を温める充電式。使い捨てホットアイマスクを毎晩使う人の乗り換え先。",
+ notFor:"装着したまま眠るものではなく就寝前ケア用。使い捨て数枚で満足なら価格に見合わない。"},
+
+// --- 入浴と習慣(追加カテゴリ) ---
+{cat:"入浴と習慣", name:"BARTH 中性重炭酸入浴剤", brand:"BARTH", price:"約1,000円", tags:["寝つき","冷え"], keyword:"BARTH 入浴剤",
+ good:"ぬるめ長め入浴の定番入浴剤。就寝90分前入浴の習慣とセットで真価が出る。",
+ notFor:"1回あたりのコストは入浴剤として高め。まず9錠の小容量で相性確認を。"},
+{cat:"入浴と習慣", name:"クナイプ グーテナハト", brand:"クナイプ", price:"約2,000円", tags:["寝つき"], keyword:"クナイプ グーテナハト バスソルト",
+ good:"ホップとバレリアンの「おやすみ用」を掲げるバスソルト。香りで夜の入浴を演出する枠。",
+ notFor:"独特のハーブ香は好みが割れる。柑橘系が好きな人は同ブランドの他の香りから。"},
+{cat:"入浴と習慣", name:"シークリスタルス エプソムソルト", brand:"ヒロセ", price:"約1,500円", tags:["冷え"], keyword:"エプソムソルト シークリスタルス",
+ good:"コスパ重視で毎日湯船に浸かる習慣を作るための業務用サイズ。無香料で香りものと併用可。",
+ notFor:"香りの演出は皆無。バスタイムの気分も大事にしたい人は香り付き入浴剤と使い分けを。"},
+{cat:"入浴と習慣", name:"花王 バブ", brand:"花王", price:"約600円", tags:["冷え"], keyword:"バブ 入浴剤 詰め合わせ",
+ good:"炭酸入浴剤の大定番。「まず湯船に浸かる習慣を作る」ための最初の一箱として十分。",
+ notFor:"こだわりの入浴体験を求める段階の人には物足りない。習慣化の入り口用。"},
+{cat:"入浴と習慣", name:"あずきのチカラ 首肩用", brand:"小林製薬", price:"約1,500円", tags:["肩首","冷え"], keyword:"あずきのチカラ 首肩用",
+ good:"レンジで温めて繰り返し使える温熱パッド。就寝前に首肩を温める習慣の定番。",
+ notFor:"加熱回数に上限があり消耗品。就寝中に使うものではなく、あくまで寝る前のケア用。"},
+{cat:"入浴と習慣", name:"充電式ホットアイマスク", brand:"各社", price:"約4,000円", tags:["寝つき"], keyword:"ホットアイマスク 充電式 コードレス",
+ good:"使い捨てタイプを毎晩使うなら1〜2ヶ月で元が取れる計算。タイマー付きを選ぶこと。",
+ notFor:"装着したまま朝まで寝るものではない。洗えるカバーかどうかは購入前に要確認。"},
+{cat:"入浴と習慣", name:"サーモス 真空断熱マグカップ", brand:"サーモス", price:"約2,000円", tags:["寝つき"], keyword:"サーモス 真空断熱 マグカップ",
+ good:"白湯やハーブティーが冷めない夜用マグ。「寝る前の温かい一杯」の習慣を支える裏方。",
+ notFor:"これ単体で眠りに何かが起きるわけではない。習慣の道具立ての一部として。"},
+
+// --- いびき・呼吸ケア(追加カテゴリ) ---
+{cat:"いびき・呼吸ケア", name:"ブリーズライト", brand:"佐藤製薬", price:"約1,000円", tags:["いびき"], keyword:"ブリーズライト",
+ good:"鼻腔を物理的に広げるテープの定番。鼻づまり気味で口呼吸になりがちな人がまず試す市販品。",
+ notFor:"肌が弱い人は剥がすとき刺激になりやすい。いびきが激しく日中の強い眠気を伴う場合は市販品でなく受診を。"},
+{cat:"いびき・呼吸ケア", name:"ナイトミン 鼻呼吸テープ", brand:"小林製薬", price:"約700円", tags:["いびき"], keyword:"ナイトミン 鼻呼吸テープ",
+ good:"口に貼って鼻呼吸を促すタイプ。朝の喉のイガイガ・口の乾きが気になる人の定番。",
+ notFor:"鼻づまりがある状態での使用は不可。息苦しさを感じたらすぐ中止すること。"},
+{cat:"いびき・呼吸ケア", name:"のどぬ〜る ぬれマスク", brand:"小林製薬", price:"約500円", tags:["中途覚醒"], keyword:"のどぬーる ぬれマスク 就寝用",
+ good:"冬の乾燥で喉が痛くて目が覚める人の、加湿器を買う前の応急装備。",
+ notFor:"マスクをして眠ること自体が苦手な人には続かない。根本対策は寝室の加湿。"}
 ];
 
 /* ================= 診断ロジック ================= */
 const TYPES = {
-  A:{name:"🌙 寝つけない夜型", cats:["音と香り","光と環境","寝具・リカバリー"],
+  A:{name:"🌙 寝つけない夜型", cats:["音と香り","光と環境","入浴と習慣","寝具・リカバリー"],
      cause:"布団に入ってからも脳が「昼モード」のまま。寝る直前までの光(特にスマホ)と、切り替えの合図がないことが原因になりやすいタイプです。",
      tonight:"寝る90分前に部屋の照明を一段落とす。布団の中でスマホを見ないのが無理なら、「充電器を寝室の外に置く」だけでも構造的に変わります。",
      tools:"香り・温感アイマスク・加重ブランケットなど「入眠の合図」を作る道具と相性がいいタイプです。"},
-  B:{name:"🌗 細切れ睡眠型", cats:["マットレス","光と環境","音と香り"],
+  B:{name:"🌗 細切れ睡眠型", cats:["マットレス","光と環境","音と香り","いびき・呼吸ケア"],
      cause:"眠りに入れてはいるのに、温度・光・音・寝返りのどれかが夜中にあなたを起こしています。原因の特定が先です。",
      tonight:"「何時ごろ・何がきっかけで起きたか」を3日だけメモしてみてください。暑さなのか、光なのか、音なのかで買うべき道具がまったく変わります。",
      tools:"遮光カーテン・耳栓・温湿度管理・寝返りしやすいマットレスなど、覚醒の原因を潰す道具が候補です。"},
-  C:{name:"🌑 朝つらい型", cats:["枕","スリープテック","寝具・リカバリー","光と環境"],
+  C:{name:"🌑 朝つらい型", cats:["枕","スリープテック","いびき・呼吸ケア","光と環境"],
      cause:"時間は寝ているのに疲れが抜けない。就寝時刻のばらつきや、眠りの浅さ、首まわりの合わない寝具が疑われるタイプです。",
      tonight:"今夜からできるのは「起きる時刻を固定する」こと。寝る時刻より起きる時刻を揃える方が、体内時計は整いやすいです。",
      tools:"睡眠の記録(スリープテック)で実態を可視化しつつ、枕と光目覚ましを見直す組み合わせが定番です。"},
@@ -542,13 +744,25 @@ const COMBO_NOTE = {
   tonightJoin:"まずはどちらか一方、着手しやすい方から1つだけ試してください。同時に全部変えると、何が効いたのか分からなくなります。"
 };
 
-function renderResult(){
+function renderResult(forceK1,forceK2){
   moonFill.setAttribute('y',0);
   qProgress.textContent='RESULT';
   const sorted=Object.keys(score).sort((a,b)=>score[b]-score[a]);
-  const [k1,k2]=sorted;
-  const isCombo = score[k2]>0 && (score[k1]-score[k2])<=1 && score[k1]<QUESTIONS.length;
+  const k1=forceK1||sorted[0];
+  const k2=forceK2||sorted[1];
+  const isCombo = forceK1 ? !!forceK2 : (score[k2]>0 && (score[k1]-score[k2])<=1 && score[k1]<QUESTIONS.length);
   const t1=TYPES[k1];
+  const typeParam = isCombo ? (k1+"_"+k2) : k1;
+  const shareUrl = location.origin + location.pathname + "?type=" + typeParam;
+  const shareTypeName = isCombo ? (TYPES[k1].name+" × "+TYPES[k2].name) : TYPES[k1].name;
+  const shareText = encodeURIComponent("私の睡眠タイプは「"+shareTypeName+"」でした。あなたの夜はどのタイプ? 3分でわかる睡眠タイプ診断 | Somni");
+  const shareHtml = `
+    <div class="share-row">
+      <span class="share-label">結果をシェア</span>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener" onclick="track('share_click',{channel:'x',sleep_type:'${typeParam}'})">Xでポスト</a>
+      <a class="share-btn" href="https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}" target="_blank" rel="noopener" onclick="track('share_click',{channel:'line',sleep_type:'${typeParam}'})">LINEで送る</a>
+      <button class="share-btn" type="button" onclick="if(navigator.clipboard){navigator.clipboard.writeText('${shareUrl}');this.textContent='コピーしました';}track('share_click',{channel:'copy',sleep_type:'${typeParam}'})">URLをコピー</button>
+    </div>`;
 
   let bodyHtml;
   if(isCombo){
@@ -567,10 +781,11 @@ function renderResult(){
       <div class="hero-actions" style="margin-top:26px">
         <a class="btn btn-primary" href="#products" id="goProducts">両タイプ向けのグッズを見る</a>
       </div>
+      ${shareHtml}
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
-    track('quiz_complete', { sleep_type: `${k1}_${k2}`, is_combo: true });
+    track(forceK1 ? 'quiz_restore' : 'quiz_complete', { sleep_type: typeParam, is_combo: true });
     document.getElementById('goProducts').addEventListener('click',()=>filterByCats(catsSet,`${t1.name} × ${t2.name}`));
   } else {
     bodyHtml=`
@@ -584,10 +799,11 @@ function renderResult(){
       <div class="hero-actions" style="margin-top:26px">
         <a class="btn btn-primary" href="#products" id="goProducts">このタイプ向けのグッズを見る</a>
       </div>
+      ${shareHtml}
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
-    track('quiz_complete', { sleep_type: k1, is_combo: false });
+    track(forceK1 ? 'quiz_restore' : 'quiz_complete', { sleep_type: typeParam, is_combo: false });
     document.getElementById('goProducts').addEventListener('click',()=>filterByCats(t1.cats,t1.name));
   }
   document.getElementById('restart').addEventListener('click',()=>{
@@ -596,8 +812,16 @@ function renderResult(){
 }
 renderQ();
 
+// シェアURL(?type=A や ?type=A_D)で開かれた場合は結果を直接表示
+(function(){
+  const m=(new URLSearchParams(location.search).get('type')||'').match(/^([ABCD])(?:_([ABCD]))?$/);
+  if(m && TYPES[m[1]] && (!m[2] || (TYPES[m[2]] && m[2]!==m[1]))){
+    renderResult(m[1], m[2]||null);
+  }
+})();
+
 /* ================= 商品グリッド ================= */
-const CATS=["すべて","枕","マットレス","寝具・リカバリー","光と環境","音と香り","スリープテック"];
+const CATS=["すべて","枕","マットレス","寝具・リカバリー","光と環境","音と香り","スリープテック","いびき・呼吸ケア","入浴と習慣"];
 const grid=document.getElementById('grid');
 const filters=document.getElementById('filters');
 const tagNote=document.getElementById('tagNote');
@@ -627,7 +851,66 @@ const AFFILIATE_MAP = {
   "YOLU カームナイトリペア シャンプー": "https://hb.afl.rakuten.co.jp/hgc/g00u24gn.k90d6947.g00u24gn.k90d7fa3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkiseki-shop%2Fyolu-ha-a-7787-7794%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkiseki-shop%2Fi%2F10013975%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
   "Fitbit Inspire3": "https://hb.afl.rakuten.co.jp/hgc/g00q072n.k90d61b2.g00q072n.k90d7ca6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F17271717%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F20762644%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
   "SwitchBot ハブ2": "https://hb.afl.rakuten.co.jp/hgc/g00s8b0n.k90d691d.g00s8b0n.k90d72fb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgbft-ltd%2Fw3-2021-0666%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgbft-ltd%2Fi%2F10027407%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
-  "ブレインスリープ コイン": "https://hb.afl.rakuten.co.jp/hgc/g00u2eun.k90d6f9c.g00u2eun.k90d774c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrainsleep%2Fcoin%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrainsleep%2Fi%2F10000117%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6"
+  "ブレインスリープ コイン": "https://hb.afl.rakuten.co.jp/hgc/g00u2eun.k90d6f9c.g00u2eun.k90d774c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrainsleep%2Fcoin%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrainsleep%2Fi%2F10000117%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "エアウィーヴ ピロー S-LINE": "https://hb.afl.rakuten.co.jp/hgc/g00qfxwn.k90d659b.g00qfxwn.k90d7447/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fairweave%2Faw-pillow-s-line%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fairweave%2Fi%2F10000033%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "トゥルースリーパー セブンスピロー": "https://hb.afl.rakuten.co.jp/hgc/g00ppmmn.k90d67da.g00ppmmn.k90d759d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshopjapan%2Ftr7u-s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fshopjapan%2Fi%2F10005419%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "西川 エアー3D ピロー": "https://hb.afl.rakuten.co.jp/hgc/g00s9vhn.k90d627c.g00s9vhn.k90d7780/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftbsshopping%2Fm0001602%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftbsshopping%2Fi%2F10007903%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ニトリ ホテルスタイル枕 プレミアム": "https://hb.afl.rakuten.co.jp/hgc/g00py47n.k90d622b.g00py47n.k90d7279/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnitori%2F7550731%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnitori%2Fi%2F10279023%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "GOKUMIN 低反発枕": "https://hb.afl.rakuten.co.jp/hgc/g00tlrnn.k90d6587.g00tlrnn.k90d7333/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgokumin%2Fptm-01%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgokumin%2Fi%2F10000004%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "昭和西川 ギガ枕": "https://hb.afl.rakuten.co.jp/hgc/g00qf60n.k90d60d6.g00qf60n.k90d70fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsoleine%2F2211001012994-c%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsoleine%2Fi%2F10008778%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "モットン 枕 高反発": "https://hb.afl.rakuten.co.jp/hgc/g00t8fen.k90d6c75.g00t8fen.k90d79ba/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmotton-japan%2Fmerry%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmotton-japan%2Fi%2F10000004%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "王様の夢枕": "https://hb.afl.rakuten.co.jp/hgc/g00qjdln.k90d658d.g00qjdln.k90d76f0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffutonyasan%2Fs-500410%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ffutonyasan%2Fi%2F10004781%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "モットン マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00t8fen.k90d6c75.g00t8fen.k90d79ba/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmotton-japan%2Fmotton_mat_s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmotton-japan%2Fi%2F10000007%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "雲のやすらぎプレミアム": "https://hb.afl.rakuten.co.jp/hgc/g00ryq9n.k90d6951.g00ryq9n.k90d745c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fitty-shop%2Fkumo_3mat%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fitty-shop%2Fi%2F10001105%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "エアウィーヴ スマートZ01": "https://hb.afl.rakuten.co.jp/hgc/g00saw0n.k90d6afe.g00saw0n.k90d7ece/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff235016-kota%2F6506-30037808%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff235016-kota%2Fi%2F10000192%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "西川 エアー01 マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00s9vhn.k90d627c.g00s9vhn.k90d7780/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftbsshopping%2Fm0001603%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftbsshopping%2Fi%2F10007904%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ソムレスタ マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00tkrvn.k90d673b.g00tkrvn.k90d7b5c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsomresta%2Fsom-m010%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsomresta%2Fi%2F10000121%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "LIMNE マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00u9ign.k90d65fc.g00u9ign.k90d7748/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flimne%2Fv_41923043524792%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flimne%2Fi%2F10000015%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ニトリ Nスリープ プレミアム": "https://hb.afl.rakuten.co.jp/hgc/g00py47n.k90d622b.g00py47n.k90d7279/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnitori%2F2025360s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnitori%2Fi%2F10318094%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "アイリスオーヤマ エアリーマットレス": "https://hb.afl.rakuten.co.jp/hgc/g00pr3yn.k90d600e.g00pr3yn.k90d723e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frack-kan%2F536256%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frack-kan%2Fi%2F10027969%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "VENEX リカバリーウェア": "https://hb.afl.rakuten.co.jp/hgc/g00tp1dn.k90d6513.g00tp1dn.k90d7d9c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fvenex-j%2F81148115%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fvenex-j%2Fi%2F10000440%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "SIXPAD リカバリーウェア": "https://hb.afl.rakuten.co.jp/hgc/g00r20gn.k90d6005.g00r20gn.k90d7247/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmtgec-beauty%2F1387420101%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmtgec-beauty%2Fi%2F10002103%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ニトリ 重い毛布": "https://hb.afl.rakuten.co.jp/hgc/g00py47n.k90d622b.g00py47n.k90d7279/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnitori%2F2115100009698s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnitori%2Fi%2F10315578%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "無印良品 脇に縫い目のない パジャマ": "https://hb.afl.rakuten.co.jp/hgc/g00tpdhn.k90d63ea.g00tpdhn.k90d7648/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550584971525%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmujirushi-ryohin%2Fi%2F10009482%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "今治タオルケット": "https://hb.afl.rakuten.co.jp/hgc/g00rubtn.k90d68cf.g00rubtn.k90d7fdc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fesaki210%2Fket_ro_imtk_8%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fesaki210%2Fi%2F10000290%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "昭和西川 羽毛布団 ホワイトダック": "https://hb.afl.rakuten.co.jp/hgc/g00qf60n.k90d60d6.g00qf60n.k90d70fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsoleine%2F3011300017az92111%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsoleine%2Fi%2F10008248%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "パシーマ キルトケット": "https://hb.afl.rakuten.co.jp/hgc/g00spvhn.k90d6a2e.g00spvhn.k90d7877/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdinos-kagu%2F1100802989%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdinos-kagu%2Fi%2F10751125%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "fashy 湯たんぽ": "https://hb.afl.rakuten.co.jp/hgc/g00rivvn.k90d667e.g00rivvn.k90d78db/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flucida%2Ffs9-00%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flucida%2Fi%2F10021043%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "王様の足枕": "https://hb.afl.rakuten.co.jp/hgc/g00px5in.k90d6e2f.g00px5in.k90d7618/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foyasumi%2F500141%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Foyasumi%2Fi%2F10033772%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "YABAE 光目覚まし時計": "https://hb.afl.rakuten.co.jp/hgc/g00utmfn.k90d65fe.g00utmfn.k90d7b56/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshinra-life%2F201801002r1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fshinra-life%2Fi%2F10000050%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "SwitchBot シーリングライト": "https://hb.afl.rakuten.co.jp/hgc/g00uc4wn.k90d684a.g00uc4wn.k90d7b7e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fswitchbot%2F10000040%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fswitchbot%2Fi%2F10000040%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "アイリスオーヤマ LEDシーリングライト 調光調色": "https://hb.afl.rakuten.co.jp/hgc/g00t3ztn.k90d6972.g00t3ztn.k90d7a18/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Firisplaza-r%2F297343%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Firisplaza-r%2Fi%2F10152150%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "象印 スチーム式加湿器": "https://hb.afl.rakuten.co.jp/hgc/g00tbqcn.k90d60c9.g00tbqcn.k90d755f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff272264-fujiidera%2F448%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff272264-fujiidera%2Fi%2F10000463%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "SwitchBot 温湿度計": "https://hb.afl.rakuten.co.jp/hgc/g00rwh8n.k90d6ad4.g00rwh8n.k90d727c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkitcut-ps%2F517050%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkitcut-ps%2Fi%2F10130588%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "アイリスオーヤマ サーキュレーター 静音": "https://hb.afl.rakuten.co.jp/hgc/g00t3ztn.k90d6972.g00t3ztn.k90d7a18/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Firisplaza-r%2F287573%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Firisplaza-r%2Fi%2F10135593%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "突っ張り 遮光 ロールスクリーン": "https://hb.afl.rakuten.co.jp/hgc/g00rvmxn.k90d67a7.g00rvmxn.k90d7827/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkabegami-luck%2Ftkw-rollscreen%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkabegami-luck%2Fi%2F10001846%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "人感センサー ナイトライト 足元灯": "https://hb.afl.rakuten.co.jp/hgc/g00u3jqn.k90d6c2b.g00u3jqn.k90d7c93/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluluhope%2Fgs-hom-0003%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluluhope%2Fi%2F10001985%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Anker Soundcore Sleep A20": "https://hb.afl.rakuten.co.jp/hgc/g00rr09n.k90d647f.g00rr09n.k90d70c4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fanker%2Fa6611%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fanker%2Fi%2F10001980%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "MOLDEX 耳栓 お試し": "https://hb.afl.rakuten.co.jp/hgc/g00ucmxn.k90d6c70.g00ucmxn.k90d7982/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Felifestore%2Fmoldex-02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Felifestore%2Fi%2F10001833%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "サイレンシア 耳栓": "https://hb.afl.rakuten.co.jp/hgc/g00qmvqn.k90d69a5.g00qmvqn.k90d7950/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftravel-passport%2Fcon2031%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftravel-passport%2Fi%2F10006243%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "無印良品 超音波うるおいアロマディフューザー": "https://hb.afl.rakuten.co.jp/hgc/g00tpdhn.k90d63ea.g00tpdhn.k90d7648/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550344554586%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmujirushi-ryohin%2Fi%2F10004262%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "生活の木 ラベンダー 精油": "https://hb.afl.rakuten.co.jp/hgc/g00u2kdn.k90d62e2.g00u2kdn.k90d72c2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftreeoflife-official%2F084403290%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftreeoflife-official%2Fi%2F10000042%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "かゆらぎ お香": "https://hb.afl.rakuten.co.jp/hgc/g00tyidn.k90d6fd4.g00tyidn.k90d7fd2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fas-store%2F10000011%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fas-store%2Fi%2F10000012%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ポンパドール カモミール": "https://hb.afl.rakuten.co.jp/hgc/g00qpdqn.k90d6ff4.g00qpdqn.k90d7a10/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fp-tano%2F767-8943%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fp-tano%2Fi%2F10549513%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "AGF ちょっと贅沢な珈琲店 カフェインレス": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4901111611818%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11363407%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Xiaomi Smart Band9": "https://hb.afl.rakuten.co.jp/hgc/g00u4hyn.k90d604f.g00u4hyn.k90d7209/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fxiaomiofficial%2Fm48365%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fxiaomiofficial%2Fi%2F10000172%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "HUAWEI Band9": "https://hb.afl.rakuten.co.jp/hgc/g00tit6n.k90d6e71.g00tit6n.k90d7880/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fksdenki%2F6942103117251%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fksdenki%2Fi%2F10506578%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Oura Ring": "https://hb.afl.rakuten.co.jp/hgc/g00rdlsn.k90d631b.g00rdlsn.k90d749b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fblade%2Frnge3-x09t-h240523%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fblade%2Fi%2F10225219%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Withings Sleep": "https://hb.afl.rakuten.co.jp/hgc/g00uiobn.k90d6a30.g00uiobn.k90d731c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftrend-tech%2F3700546703959%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftrend-tech%2Fi%2F10010215%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Google Nest Hub 第2世代": "https://hb.afl.rakuten.co.jp/hgc/g00trgdn.k90d6977.g00trgdn.k90d7d55/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ficockaden%2F193575009384%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ficockaden%2Fi%2F10006300%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Nature Remo mini2": "https://hb.afl.rakuten.co.jp/hgc/g00tit6n.k90d6e71.g00tit6n.k90d7880/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fksdenki%2F0865164000385%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fksdenki%2Fi%2F10497711%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Apple Watch SE": "https://hb.afl.rakuten.co.jp/hgc/g00s2dan.k90d6c07.g00s2dan.k90d7a93/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkeitai-god%2Fawse3-40mm%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkeitai-god%2Fi%2F10022088%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "パナソニック 目もとエステ": "https://hb.afl.rakuten.co.jp/hgc/g00pob7n.k90d6231.g00pob7n.k90d7211/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdenkiti%2Fehsw65w7227%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdenkiti%2Fi%2F10029163%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "BARTH 入浴剤": "https://hb.afl.rakuten.co.jp/hgc/g00sk3un.k90d623e.g00sk3un.k90d72d2/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsleepdays%2F2003024a2880%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsleepdays%2Fi%2F10000082%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "クナイプ グーテナハト バスソルト": "https://hb.afl.rakuten.co.jp/hgc/g00pzczn.k90d6de0.g00pzczn.k90d764d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkoyama-p%2F4580294850438-3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkoyama-p%2Fi%2F10012312%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "エプソムソルト シークリスタルス": "https://hb.afl.rakuten.co.jp/hgc/g00tivmn.k90d68f4.g00tivmn.k90d7d81/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff332046-tamano%2F56260022%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff332046-tamano%2Fi%2F10000012%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "バブ 入浴剤 詰め合わせ": "https://hb.afl.rakuten.co.jp/hgc/g00sixan.k90d67fc.g00sixan.k90d79cd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ff062049-sakata%2F8932-30011850-00%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ff062049-sakata%2Fi%2F10003053%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "あずきのチカラ 首肩用": "https://hb.afl.rakuten.co.jp/hgc/g00ugynn.k90d6968.g00ugynn.k90d7ce1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakutensokuhaimart%2F4901548603998%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakutensokuhaimart%2Fi%2F10021030%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ホットアイマスク 充電式 コードレス": "https://hb.afl.rakuten.co.jp/hgc/g00uqfbn.k90d6c8f.g00uqfbn.k90d77b3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhongge%2Fhgtbhl610%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fhongge%2Fi%2F10000122%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "サーモス 真空断熱 マグカップ": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F406434%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11360772%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ブリーズライト": "https://hb.afl.rakuten.co.jp/hgc/g00pl1pn.k90d6152.g00pl1pn.k90d7ec6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkenkocom%2F581962%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkenkocom%2Fi%2F12207998%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ナイトミン 鼻呼吸テープ": "https://hb.afl.rakuten.co.jp/hgc/g00ugynn.k90d6968.g00ugynn.k90d7ce1/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakutensokuhaimart%2F4987072084410%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakutensokuhaimart%2Fi%2F10015644%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "のどぬーる ぬれマスク 就寝用": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F83686%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F10963112%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6"
 };
 function rakutenUrl(k){
   if(AFFILIATE_MAP[k]) return AFFILIATE_MAP[k];
