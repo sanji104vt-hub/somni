@@ -237,6 +237,7 @@ footer .logo{font-size:1.05rem}
     <nav class="nav-links" aria-label="メイン">
       <a href="#quiz">睡眠タイプ診断</a>
       <a href="#products">グッズを探す</a>
+      <a href="#column">コラム</a>
       <a href="#guide">選び方</a>
       <a href="#faq">よくある質問</a>
       <a class="nav-cta" href="#quiz">3分で診断する</a>
@@ -290,6 +291,27 @@ footer .logo{font-size:1.05rem}
     <div class="filters" id="filters" role="group" aria-label="カテゴリ絞り込み"></div>
     <p class="tag-note" id="tagNote"></p>
     <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ===== COLUMN ===== -->
+<section id="column" aria-label="コラム">
+  <div class="wrap">
+    <span class="eyebrow">Column</span>
+    <h2>買う前に読む、正直コラム</h2>
+    <p class="lead">「結局どっちがいいの」「これ買って後悔しない?」——検討段階の疑問に、向かない人まで含めて答えます。</p>
+    <div class="guide-grid">
+      <article class="guide">
+        <h3><a href="./column/nell-vs-koala.html" style="color:inherit;text-decoration:none">NELL vs コアラマットレス、中途覚醒持ちならどっち</a></h3>
+        <p>夜中に何度も目が覚める人が本当に見るべきは「寝返りのしやすさ」より「振動の伝わりにくさ」。2商品を体格・寝姿勢別に比較しました。</p>
+        <p style="margin-top:10px"><a href="./column/nell-vs-koala.html" style="color:var(--amber-soft);font-size:.85rem">続きを読む →</a></p>
+      </article>
+      <article class="guide">
+        <h3><a href="./column/hitsuji-kokai.html" style="color:inherit;text-decoration:none">ヒツジのいらない枕、後悔する人の共通点</a></h3>
+        <p>レビューの星の数だけで選ぶと起きる典型的な失敗パターンを、購入者の傾向から3つに整理しました。</p>
+        <p style="margin-top:10px"><a href="./column/hitsuji-kokai.html" style="color:var(--amber-soft);font-size:.85rem">続きを読む →</a></p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -351,6 +373,18 @@ footer .logo{font-size:1.05rem}
 </footer>
 
 <script>
+/* ================= 計測(GA4) =================
+   gtagが未定義(GA4未接続)でも壊れない安全ラッパー。
+   GA4接続後は特別な作業なしにイベントが飛び始める。
+============================================ */
+function track(eventName, params){
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params);
+  } else {
+    console.debug('[track:noop]', eventName, params);
+  }
+}
+
 /* ================= 商品DB =================
    url は暫定で楽天検索URL。Claude Code側で
    Rakuten API (applicationId は共通のもの) を叩き、
@@ -536,6 +570,7 @@ function renderResult(){
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
+    track('quiz_complete', { sleep_type: `${k1}_${k2}`, is_combo: true });
     document.getElementById('goProducts').addEventListener('click',()=>filterByCats(catsSet,`${t1.name} × ${t2.name}`));
   } else {
     bodyHtml=`
@@ -552,6 +587,7 @@ function renderResult(){
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
+    track('quiz_complete', { sleep_type: k1, is_combo: false });
     document.getElementById('goProducts').addEventListener('click',()=>filterByCats(t1.cats,t1.name));
   }
   document.getElementById('restart').addEventListener('click',()=>{
@@ -566,8 +602,9 @@ const grid=document.getElementById('grid');
 const filters=document.getElementById('filters');
 const tagNote=document.getElementById('tagNote');
 
-// AFFILIATE_MAP: update_prices.py が出力した public/index.affiliate-map.json の中身。
-// card() はここに登録済みのkeywordがあれば実アフィリURLを優先して使う。
+// AFFILIATE_MAP: update_prices.py が出力する *.affiliate-map.json の中身を
+// ここに貼り付けると、card() が実アフィリURLを優先して使うようになる。
+// (Claude Codeでのビルド時にこのオブジェクトへJSON内容を流し込む想定)
 const AFFILIATE_MAP = {
   "ブレインスリープ ピロー": "https://hb.afl.rakuten.co.jp/hgc/g00u2eun.k90d6f9c.g00u2eun.k90d774c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrainsleep%2Fbs147s1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrainsleep%2Fi%2F10000001%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
   "ヒツジのいらない枕 至極": "https://hb.afl.rakuten.co.jp/hgc/g00tnhln.k90d627e.g00tnhln.k90d754d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2F33taiyo%2Fhitsuji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2F33taiyo%2Fi%2F10000020%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
@@ -605,7 +642,7 @@ function card(p){
     <p class="good">${p.good}</p>
     <p class="notfor"><b>向かない人:</b> ${p.notFor}</p>
     <div class="tags">${p.tags.map(t=>`<i>#${t}</i>`).join('')}</div>
-    <a class="buy" href="${rakutenUrl(p.keyword)}" target="_blank" rel="nofollow sponsored noopener" data-keyword="${p.keyword}">楽天で最新価格を見る →</a>
+    <a class="buy" href="${rakutenUrl(p.keyword)}" target="_blank" rel="nofollow sponsored noopener" data-keyword="${p.keyword}" data-cat="${p.cat}" onclick="track('product_click',{keyword:'${p.keyword}',category:'${p.cat}'})">楽天で最新価格を見る →</a>
   </article>`;
 }
 grid.innerHTML=PRODUCTS.map(card).join('');
@@ -617,6 +654,7 @@ filters.querySelectorAll('button').forEach(b=>{
     b.classList.add('active');
     tagNote.textContent='';
     const c=b.dataset.c;
+    track('category_filter', { category: c });
     grid.querySelectorAll('.card').forEach(el=>{
       el.classList.toggle('dim', c!=="すべて" && el.dataset.cat!==c);
     });
