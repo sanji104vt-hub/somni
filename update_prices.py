@@ -57,11 +57,12 @@ SLEEP_SEC = 1.2
 
 
 def fetch_item(keyword: str, app_id: str, access_key: str, affiliate_id: str, origin: str) -> dict | None:
-    """楽天商品検索APIを1件叩いて、最安値の商品情報を返す。失敗時はNone。"""
+    """楽天商品検索APIを1件叩いて、最も関連度の高い商品情報を返す。失敗時はNone。
+    sort=+itemPrice(価格順)にすると交換バンドや保護フィルムなど無関係な
+    安価アクセサリーが先頭に来てしまうため、標準(関連度)ソートを使う。"""
     params = {
         "format": "json",
         "hits": 5,
-        "sort": "+itemPrice",
         "applicationId": app_id,
         "accessKey": access_key,
         "keyword": keyword,

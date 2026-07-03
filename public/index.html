@@ -403,7 +403,7 @@ const PRODUCTS = [
 {cat:"光と環境", name:"1級遮光カーテン", brand:"各社", price:"約4,000円〜", tags:["中途覚醒","朝つらい"], keyword:"1級遮光カーテン",
  good:"朝方の光や街灯で目が覚める人への費用対効果が最も高い投資のひとつ。まずここから。",
  notFor:"「朝は光で自然に起きたい」人が完全遮光にすると、逆に起きられなくなることがある。光目覚ましとの併用を。"},
-{cat:"光と環境", name:"SwitchBot カーテン", brand:"SwitchBot", price:"約9,000円", tags:["朝つらい"], keyword:"SwitchBot カーテン 3",
+{cat:"光と環境", name:"SwitchBot カーテン", brand:"SwitchBot", price:"約9,000円", tags:["朝つらい"], keyword:"SwitchBot カーテン3",
  good:"起床時刻にカーテンを自動で開け、光で起きる環境を作れる。遮光カーテンと組み合わせると「夜は真っ暗・朝は光」が自動化できる。",
  notFor:"カーテンレールの形状によっては取り付け不可。賃貸でもレール確認は必須。機械の駆動音が気になる人も。"},
 {cat:"光と環境", name:"光目覚まし トトノエライト", brand:"ムーンムーン", price:"約30,000円", tags:["朝つらい"], keyword:"トトノエライト 光目覚まし",
@@ -428,7 +428,7 @@ const PRODUCTS = [
  notFor:"睡眠グッズとしての直接効果を期待する人には不向き。あくまで夜のルーティン作りの脇役。"},
 
 // --- スリープテック ---
-{cat:"スリープテック", name:"Fitbit Inspire 3", brand:"Google", price:"約13,000円", tags:["朝つらい","記録"], keyword:"Fitbit Inspire 3",
+{cat:"スリープテック", name:"Fitbit Inspire 3", brand:"Google", price:"約13,000円", tags:["朝つらい","記録"], keyword:"Fitbit Inspire3",
  good:"睡眠時間と就寝時刻のばらつきを可視化する入門機。振動アラームで同居人を起こさず起きられる。",
  notFor:"スコアの点数に一喜一憂してしまう人には毒。数字に採点されると余計に眠れなくなるタイプは手を出さない方がいい。"},
 {cat:"スリープテック", name:"SwitchBot ハブ2", brand:"SwitchBot", price:"約9,000円", tags:["暑さ","中途覚醒"], keyword:"SwitchBot ハブ2",
@@ -565,10 +565,32 @@ const grid=document.getElementById('grid');
 const filters=document.getElementById('filters');
 const tagNote=document.getElementById('tagNote');
 
-// AFFILIATE_MAP: update_prices.py が出力する *.affiliate-map.json の中身を
-// ここに貼り付けると、card() が実アフィリURLを優先して使うようになる。
-// (Claude Codeでのビルド時にこのオブジェクトへJSON内容を流し込む想定)
-const AFFILIATE_MAP = {};
+// AFFILIATE_MAP: update_prices.py が出力した public/index.affiliate-map.json の中身。
+// card() はここに登録済みのkeywordがあれば実アフィリURLを優先して使う。
+const AFFILIATE_MAP = {
+  "ブレインスリープ ピロー": "https://hb.afl.rakuten.co.jp/hgc/g00u2eun.k90d6f9c.g00u2eun.k90d774c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrainsleep%2Fbs147s1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrainsleep%2Fi%2F10000001%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ヒツジのいらない枕 至極": "https://hb.afl.rakuten.co.jp/hgc/g00tnhln.k90d627e.g00tnhln.k90d754d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2F33taiyo%2Fhitsuji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2F33taiyo%2Fi%2F10000020%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "テンピュール オリジナルネックピロー": "https://hb.afl.rakuten.co.jp/hgc/g00qn68n.k90d61d2.g00qn68n.k90d7edf/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fa-price%2F5705940618067%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fa-price%2Fi%2F10577602%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "NELL マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00uph9n.k90d60b0.g00uph9n.k90d73fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnell%2Fne-om-x%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnell%2Fi%2F10000001%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "コアラマットレス": "https://hb.afl.rakuten.co.jp/hgc/g00u6p1n.k90d6b53.g00u6p1n.k90d791c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkoalasleep%2F101-0035%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkoalasleep%2Fi%2F10000545%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "エマスリープ マットレス": "https://hb.afl.rakuten.co.jp/hgc/g00rwvvn.k90d6f20.g00rwvvn.k90d7a2e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fasil%2Femma-mat-premium-k%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fasil%2Fi%2F10001883%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "GOKUMIN マットレス 高反発": "https://hb.afl.rakuten.co.jp/hgc/g00tlrnn.k90d6587.g00tlrnn.k90d7333/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgokumin%2Fgmws-01%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgokumin%2Fi%2F10000067%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "BAKUNE リカバリーウェア 上下": "https://hb.afl.rakuten.co.jp/hgc/g00thbmn.k90d6bcf.g00thbmn.k90d792d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftential%2Fbakune-drylong-w-set_25ss%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftential%2Fi%2F10000275%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "YnM 加重ブランケット": "https://hb.afl.rakuten.co.jp/hgc/g00u74wn.k90d6030.g00u74wn.k90d7e2c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flachic12%2Ftk4457fb53f3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Flachic12%2Fi%2F10167042%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ニトリ Nクール 敷きパッド": "https://hb.afl.rakuten.co.jp/hgc/g00py47n.k90d622b.g00py47n.k90d7279/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnitori%2F2115100096230s%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnitori%2Fi%2F10327754%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "王様の抱き枕": "https://hb.afl.rakuten.co.jp/hgc/g00px5in.k90d6e2f.g00px5in.k90d7618/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foyasumi%2Fs-500406%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Foyasumi%2Fi%2F10005715%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "1級遮光カーテン": "https://hb.afl.rakuten.co.jp/hgc/g00pwe6n.k90d611d.g00pwe6n.k90d7119/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftengoku%2F5317%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ftengoku%2Fi%2F10034680%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "SwitchBot カーテン3": "https://hb.afl.rakuten.co.jp/hgc/g00rwh8n.k90d6ad4.g00rwh8n.k90d727c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkitcut-ps%2F518728%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkitcut-ps%2Fi%2F10131156%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "トトノエライト 光目覚まし": "https://hb.afl.rakuten.co.jp/hgc/g00rfzin.k90d6c4f.g00rfzin.k90d78ec/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmoonmoon%2Finti-sq-02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmoonmoon%2Fi%2F10000043%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "めぐりズム 蒸気でホットアイマスク": "https://hb.afl.rakuten.co.jp/hgc/g00q9fkn.k90d6c81.g00q9fkn.k90d7f29/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpupuhima%2Fh4901301460547-6%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpupuhima%2Fi%2F10055595%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Dreamegg ホワイトノイズマシン": "https://hb.afl.rakuten.co.jp/hgc/g00txman.k90d6376.g00txman.k90d79f8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fisei-shop%2Fnoisemachine-d3pro%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fisei-shop%2Fi%2F10000002%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "無印良品 エッセンシャルオイル おやすみ": "https://hb.afl.rakuten.co.jp/hgc/g00u3bvn.k90d6852.g00u3bvn.k90d7102/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffidela%2Ffid2-0dfpt1861%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ffidela%2Fi%2F10578546%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Loop Quiet 耳栓": "https://hb.afl.rakuten.co.jp/hgc/g00ukcgn.k90d6aa3.g00ukcgn.k90d7fde/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Floopjapan%2Fen-qt-2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Floopjapan%2Fi%2F10000023%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "YOLU カームナイトリペア シャンプー": "https://hb.afl.rakuten.co.jp/hgc/g00u24gn.k90d6947.g00u24gn.k90d7fa3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkiseki-shop%2Fyolu-ha-a-7787-7794%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkiseki-shop%2Fi%2F10013975%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "Fitbit Inspire3": "https://hb.afl.rakuten.co.jp/hgc/g00q072n.k90d61b2.g00q072n.k90d7ca6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F17271717%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbook%2Fi%2F20762644%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "SwitchBot ハブ2": "https://hb.afl.rakuten.co.jp/hgc/g00s8b0n.k90d691d.g00s8b0n.k90d72fb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgbft-ltd%2Fw3-2021-0666%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgbft-ltd%2Fi%2F10027407%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6",
+  "ブレインスリープ コイン": "https://hb.afl.rakuten.co.jp/hgc/g00u2eun.k90d6f9c.g00u2eun.k90d774c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbrainsleep%2Fcoin%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbrainsleep%2Fi%2F10000117%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6"
+};
 function rakutenUrl(k){
   if(AFFILIATE_MAP[k]) return AFFILIATE_MAP[k];
   return "https://search.rakuten.co.jp/search/mall/"+encodeURIComponent(k)+"/";
