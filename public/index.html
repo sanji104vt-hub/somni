@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somni(ソムニ)| 眠りのタイプ診断と快眠グッズの正直な選び方</title>
+<meta name="description" content="寝つけない、夜中に目が覚める、朝がつらい——。5つの質問であなたの睡眠タイプを診断し、枕・マットレス・快眠グッズを「向かない人」まで正直に紹介する眠りの手引きサイト。">
+<meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
+<link rel="canonical" href="https://somni.sanji-104vt.workers.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Somni | 眠りのタイプ診断と快眠グッズの正直な選び方">
+<meta property="og:description" content="5つの質問で睡眠タイプを診断。枕・マットレス・快眠グッズを「向かない人」まで正直に紹介します。">
+<meta property="og:url" content="https://somni.sanji-104vt.workers.dev/">
+<meta property="og:site_name" content="Somni">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#12162e">
+
+<!-- ===== GA4: 新規プロパティ発行後にIDを差し替えてください ===== -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Somni",
+  "alternateName": "ソムニ",
+  "url": "https://somni.sanji-104vt.workers.dev/",
+  "description": "睡眠タイプ診断と快眠グッズの比較・紹介サイト",
+  "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "夜中に何度も目が覚めるのは、枕とマットレスどちらを見直すべきですか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "寝返りのたびに目が覚める感覚があるならマットレス(体圧分散と反発力)、首や肩の違和感で起きるなら枕から見直すのが目安です。両方買い替える前に、まず室温と光の環境を確認するのがおすすめです。"}
+    },
+    {
+      "@type": "Question",
+      "name": "高いマットレスを買えば眠れるようになりますか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "価格と相性は比例しません。体格・寝姿勢・暑がりかどうかで合う硬さや素材は変わります。当サイトでは各商品に「向かない人」を明記しています。返品保証(トライアル期間)の有無を先に確認するのが失敗しないコツです。"}
+    },
+    {
+      "@type": "Question",
+      "name": "睡眠グッズで不眠症は治りますか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "治療はできません。当サイトで扱うのは眠る環境を整えるための道具の情報です。つらい不眠が2週間以上続く場合は、医療機関(睡眠外来・心療内科など)への相談を優先してください。"}
+    },
+    {
+      "@type": "Question",
+      "name": "スマートウォッチの睡眠計測は信用できますか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "医療機器ほどの精度はありませんが、「就寝時刻のばらつき」や「睡眠時間の推移」を客観視する道具としては十分役立ちます。数値を気にしすぎて眠れなくなる人には向きません。"}
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --night:#12162e;        /* 夜明け前の藍 */
+  --night-deep:#0c0f22;
+  --night-soft:#1b2140;
+  --moon:#f3efe4;         /* 月光アイボリー */
+  --moon-dim:#b9b6ac;
+  --amber:#d9a45f;        /* ろうそくの琥珀 */
+  --amber-soft:#e8c9a0;
+  --lavender:#8d93c8;     /* 薄明のラベンダー */
+  --line:rgba(243,239,228,.14);
+  --card:rgba(27,33,64,.72);
+  --serif:'Shippori Mincho', serif;
+  --sans:'Zen Kaku Gothic New', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:linear-gradient(180deg,var(--night-deep) 0%,var(--night) 30%,#161b38 100%);
+  color:var(--moon);
+  line-height:1.9;
+  letter-spacing:.02em;
+  font-size:15.5px;
+}
+::selection{background:var(--amber);color:var(--night-deep)}
+a{color:var(--amber-soft)}
+img{max-width:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:600;letter-spacing:.04em}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.5}
+h3{font-size:1.12rem}
+section{padding:72px 0}
+.eyebrow{
+  display:inline-block;font-size:.74rem;letter-spacing:.32em;color:var(--amber);
+  border-bottom:1px solid var(--amber);padding-bottom:6px;margin-bottom:18px;text-transform:uppercase;
+}
+.lead{color:var(--moon-dim);max-width:640px;margin-top:14px}
+
+/* ===== header ===== */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(12,15,34,.82);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:var(--serif);font-size:1.3rem;letter-spacing:.18em;color:var(--moon);text-decoration:none}
+.logo small{font-size:.62rem;letter-spacing:.3em;color:var(--lavender);display:block;line-height:1;margin-top:2px}
+.nav-links{display:flex;gap:26px;font-size:.82rem}
+.nav-links a{color:var(--moon-dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--amber-soft)}
+.nav-cta{
+  background:var(--amber);color:var(--night-deep)!important;font-weight:700;
+  padding:8px 18px;border-radius:999px;
+}
+@media(max-width:720px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ===== hero ===== */
+.hero{position:relative;padding:110px 0 90px;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(1.75rem,4.6vw,3rem);line-height:1.65;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--amber-soft);border-bottom:1px solid rgba(217,164,95,.5)}
+.hero p{margin-top:22px;color:var(--moon-dim);max-width:560px}
+.hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:700;font-size:.92rem;
+  padding:14px 30px;border-radius:999px;transition:transform .15s,box-shadow .2s;
+}
+.btn:focus-visible{outline:2px solid var(--amber-soft);outline-offset:3px}
+.btn-primary{background:var(--amber);color:var(--night-deep);box-shadow:0 6px 24px rgba(217,164,95,.25)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--moon)}
+.btn-ghost:hover{border-color:var(--amber)}
+.stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.stars span{position:absolute;width:2px;height:2px;background:var(--moon);border-radius:50%;opacity:.5;animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.7}}
+@media(prefers-reduced-motion:reduce){.stars span{animation:none}}
+.hero-moon{
+  position:absolute;right:6%;top:70px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#fdf8ea 0%,#e9e0c8 45%,#c9bfa4 100%);
+  box-shadow:0 0 90px rgba(243,239,228,.28);opacity:.9;z-index:1;
+}
+@media(max-width:860px){.hero-moon{width:130px;height:130px;right:-20px;top:40px;opacity:.5}}
+
+/* ===== quiz ===== */
+.quiz-box{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:38px 32px;max-width:720px;margin:34px auto 0;
+}
+.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:8px}
+.quiz-progress{font-size:.78rem;letter-spacing:.2em;color:var(--lavender)}
+.moon-meter{width:52px;height:52px;flex:0 0 52px}
+.q-text{font-family:var(--serif);font-size:1.16rem;margin:16px 0 22px;line-height:1.7}
+.q-opts{display:grid;gap:12px}
+.q-opts button{
+  text-align:left;background:rgba(12,15,34,.5);border:1px solid var(--line);
+  color:var(--moon);font-family:var(--sans);font-size:.94rem;line-height:1.7;
+  padding:14px 18px;border-radius:12px;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.q-opts button:hover,.q-opts button:focus-visible{border-color:var(--amber);background:rgba(217,164,95,.08)}
+.result-type{font-family:var(--serif);font-size:1.5rem;color:var(--amber-soft);margin:10px 0 4px}
+.result-block h4{font-family:var(--serif);color:var(--amber);font-size:.95rem;margin:20px 0 6px;letter-spacing:.1em}
+.result-block p{color:var(--moon-dim);font-size:.93rem}
+.result-note{font-size:.78rem;color:var(--lavender);margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.restart{background:none;border:none;color:var(--lavender);text-decoration:underline;cursor:pointer;font-size:.82rem;margin-top:14px}
+
+/* ===== products ===== */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 8px}
+.filters button{
+  border:1px solid var(--line);background:transparent;color:var(--moon-dim);
+  font-size:.8rem;padding:7px 16px;border-radius:999px;cursor:pointer;transition:all .15s;font-family:var(--sans);
+}
+.filters button.active,.filters button:hover{border-color:var(--amber);color:var(--amber-soft)}
+.tag-note{font-size:.8rem;color:var(--lavender);min-height:1.4em;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:18px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:24px 22px;display:flex;flex-direction:column;gap:10px;
+  transition:transform .15s,border-color .2s;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(217,164,95,.5)}
+.card .cat{font-size:.68rem;letter-spacing:.24em;color:var(--lavender)}
+.card h3{line-height:1.55}
+.card .brand{font-size:.76rem;color:var(--moon-dim)}
+.card .price{font-family:var(--serif);color:var(--amber-soft);font-size:.95rem}
+.card .good{font-size:.87rem;color:var(--moon);}
+.card .notfor{
+  font-size:.8rem;color:var(--moon-dim);background:rgba(12,15,34,.55);
+  border-left:2px solid var(--lavender);padding:8px 12px;border-radius:0 8px 8px 0;
+}
+.card .notfor b{color:var(--lavender);font-weight:700}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap}
+.card .tags i{font-style:normal;font-size:.68rem;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--moon-dim)}
+.card a.buy{
+  margin-top:auto;text-align:center;text-decoration:none;font-weight:700;font-size:.85rem;
+  border:1px solid var(--amber);color:var(--amber-soft);padding:10px;border-radius:999px;transition:all .15s;
+}
+.card a.buy:hover{background:var(--amber);color:var(--night-deep)}
+.card.dim{display:none}
+
+/* ===== guide / columns ===== */
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:30px}
+.guide{background:transparent;border-top:1px solid var(--amber);padding-top:18px}
+.guide h3{color:var(--amber-soft);margin-bottom:10px}
+.guide p{font-size:.92rem;color:var(--moon-dim)}
+
+/* ===== faq ===== */
+.faq details{border-bottom:1px solid var(--line);padding:18px 4px}
+.faq summary{cursor:pointer;font-family:var(--serif);font-size:1.02rem;list-style:none;position:relative;padding-right:30px}
+.faq summary::after{content:"＋";position:absolute;right:4px;color:var(--amber)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:12px;color:var(--moon-dim);font-size:.92rem}
+
+/* ===== footer ===== */
+footer{border-top:1px solid var(--line);padding:48px 0 60px;margin-top:40px;font-size:.8rem;color:var(--moon-dim)}
+footer .policy{max-width:720px;margin-bottom:20px;line-height:2}
+footer .logo{font-size:1.05rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">SOMNI<small>眠りの手引き</small></a>
+    <nav class="nav-links" aria-label="メイン">
+      <a href="#quiz">睡眠タイプ診断</a>
+      <a href="#products">グッズを探す</a>
+      <a href="#guide">選び方</a>
+      <a href="#faq">よくある質問</a>
+      <a class="nav-cta" href="#quiz">3分で診断する</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-label="イントロ">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="hero-moon" aria-hidden="true"></div>
+  <div class="wrap">
+    <h1>眠れない夜の原因は、<br>たぶん<em>意志の弱さ</em>じゃない。</h1>
+    <p>寝つけない。夜中に目が覚める。何時間寝ても朝がつらい——。それは性格の問題ではなく、多くの場合「眠る環境」の問題です。Somniは5つの質問であなたの睡眠タイプを整理し、枕・マットレス・快眠グッズを「向かない人」まで正直に紹介する、眠りの手引きサイトです。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#quiz">3分の睡眠タイプ診断へ</a>
+      <a class="btn btn-ghost" href="#products">先にグッズ一覧を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section id="quiz" aria-label="睡眠タイプ診断">
+  <div class="wrap">
+    <span class="eyebrow">Sleep Type Check</span>
+    <h2>あなたの夜は、どのタイプ?</h2>
+    <p class="lead">5つの質問に答えると、月が満ちていきます。満月になったとき、あなたの睡眠タイプと「今夜からできること」「頼っていい道具」が分かります。</p>
+
+    <div class="quiz-box" id="quizBox">
+      <div class="quiz-head">
+        <span class="quiz-progress" id="qProgress">QUESTION 1 / 5</span>
+        <svg class="moon-meter" viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(243,239,228,.2)" stroke-width="2"/>
+          <clipPath id="moonClip"><rect id="moonFill" x="0" y="60" width="60" height="60"/></clipPath>
+          <circle cx="30" cy="30" r="24" fill="#f3efe4" clip-path="url(#moonClip)" opacity=".9"/>
+        </svg>
+      </div>
+      <div id="quizBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products" aria-label="快眠グッズ一覧">
+  <div class="wrap">
+    <span class="eyebrow">Honest Picks</span>
+    <h2>快眠グッズ 24選 —「向かない人」まで書きます</h2>
+    <p class="lead">全部をおすすめはしません。どんな道具にも、合う人と合わない人がいます。各カードの下段に「こういう人には向かない」を必ず書いています。価格は目安です(変動します)。</p>
+    <div class="filters" id="filters" role="group" aria-label="カテゴリ絞り込み"></div>
+    <p class="tag-note" id="tagNote"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ===== GUIDE ===== -->
+<section id="guide" aria-label="選び方ガイド">
+  <div class="wrap">
+    <span class="eyebrow">Guide</span>
+    <h2>買い替える前に読む、3つの順番</h2>
+    <div class="guide-grid">
+      <article class="guide">
+        <h3>一. 道具より先に、光と時刻</h3>
+        <p>枕を替える前に、寝る90分前の照明を落とせているか、起きる時刻が毎日1時間以上ぶれていないかを確認してください。ここが崩れたまま道具を替えても、体感は変わりにくいです。お金もかかりません。</p>
+      </article>
+      <article class="guide">
+        <h3>二. 高い順ではなく、返せる順</h3>
+        <p>マットレスは体格と寝姿勢の相性が9割。レビューの星の数より「トライアル期間(返品保証)があるか」を先に見てください。120日返品可の1商品は、返品不可の5商品より安全です。</p>
+      </article>
+      <article class="guide">
+        <h3>三. 2週間つらいなら、道具ではなく病院</h3>
+        <p>眠れない状態が2週間以上続く、日中の生活に支障が出ている——その場合に必要なのは快眠グッズではなく、睡眠外来や心療内科です。ここは道具のサイトですが、この一線だけは正直に書いておきます。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="faq" aria-label="よくある質問">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2>よくある質問</h2>
+    <details>
+      <summary>夜中に何度も目が覚めます。枕とマットレス、どちらを見直すべき?</summary>
+      <p>寝返りのたびに目が覚める感覚があるならマットレス(体圧分散と反発力)、首や肩の違和感で起きるなら枕が先です。ただし、その前に室温(目安26℃前後)と、寝室に入ってくる光・音を確認してください。環境が原因のケースは意外と多いです。</p>
+    </details>
+    <details>
+      <summary>高いマットレスを買えば眠れるようになりますか?</summary>
+      <p>価格と相性は比例しません。体重が軽い人が高反発を選ぶと硬すぎて逆効果、ということも普通にあります。当サイトの各商品カードにある「向かない人」を先に読み、トライアル期間のある商品から試すのが失敗しない順番です。</p>
+    </details>
+    <details>
+      <summary>睡眠グッズで不眠症は治りますか?</summary>
+      <p>治りません。ここで扱うのは「眠る環境を整える道具」の情報であって、医療情報ではありません。つらい状態が2週間以上続く場合は、睡眠外来・心療内科などの受診を優先してください。</p>
+    </details>
+    <details>
+      <summary>スマートウォッチの睡眠計測って信用できますか?</summary>
+      <p>医療機器の精度はありませんが、「就寝時刻のばらつき」を客観視する道具としては役立ちます。逆に、スコアの数字を気にして眠れなくなるタイプの人には向きません。道具に採点されない権利もあります。</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="policy"><strong>このサイトの方針:</strong> Somniは医療情報を提供するサイトではありません。掲載しているのは、眠る環境を整えるための道具と考え方です。「治る」「改善する」といった効果の断定はしません。商品リンクにはアフィリエイトリンクを含みます。価格・仕様は変動するため、購入前に必ずリンク先の最新情報をご確認ください。つらい不眠が続く場合は、医療機関への相談を優先してください。</p>
+    <a class="logo" href="#top">SOMNI<small>眠りの手引き</small></a>
+    <p style="margin-top:14px">運営: Somni編集部(個人運営)/ お問い合わせ・掲載情報の訂正依頼はサイト運営者まで。実体験と公開情報にもとづき、広告主の意向による評価の変更は行いません。</p>
+    <p style="margin-top:10px">&copy; 2026 Somni — 眠りの手引き</p>
+  </div>
+</footer>
+
+<script>
+/* ================= 商品DB =================
+   url は暫定で楽天検索URL。Claude Code側で
+   Rakuten API (applicationId は共通のもの) を叩き、
+   keyword で検索 → affiliateUrl に一括差し替えしてください。
+   その際 Referer ヘッダは登録許可ドメインと完全一致させること。
+============================================ */
+const PRODUCTS = [
+// --- 枕 ---
+{cat:"枕", name:"ブレインスリープ ピロー", brand:"BRAIN SLEEP", price:"約33,000円", tags:["朝つらい","肩首"], keyword:"ブレインスリープ ピロー",
+ good:"9割が空気の特殊繊維で通気性が高く、頭に熱がこもりにくい。シャワーで丸洗いできる衛生面も強み。",
+ notFor:"低くて柔らかい枕に慣れている人には、最初の1週間は硬く感じやすい。価格も枕としては最上位帯。"},
+{cat:"枕", name:"ヒツジのいらない枕 至極", brand:"太陽", price:"約16,000円", tags:["肩首","寝つき"], keyword:"ヒツジのいらない枕 至極",
+ good:"三角格子のジェル構造で沈み込みすぎず、横向き寝でも首の角度が保ちやすい。",
+ notFor:"重量が約2kg近くあり、枕の位置を頻繁に動かして眠る人には扱いづらい。ふわふわ感を求める人には不向き。"},
+{cat:"枕", name:"YOKONE3B", brand:"ムーンムーン", price:"約12,000円", tags:["いびき","肩首"], keyword:"YOKONE3B 枕",
+ good:"横向き寝専用設計。仰向けでいびきをかきやすい人が横向きを維持しやすい形状。",
+ notFor:"仰向けで寝たい人には形状が合わない。横向き専用と割り切れる人向け。"},
+{cat:"枕", name:"テンピュール オリジナルネックピロー", brand:"TEMPUR", price:"約17,000円", tags:["肩首","朝つらい"], keyword:"テンピュール オリジナルネックピロー",
+ good:"低反発の定番。首のカーブに沿う波型で、仰向け中心の人の首の支えとして実績が長い。",
+ notFor:"寝返りが多い人・暑がりの人には、沈み込みと蓄熱が気になりやすい。冬は硬く、夏は柔らかく感じる素材特性がある。"},
+
+// --- マットレス ---
+{cat:"マットレス", name:"NELL マットレス", brand:"NELL", price:"約75,000円〜", tags:["中途覚醒","肩首"], keyword:"NELL マットレス",
+ good:"ポケットコイルを高密度に配置し、寝返りのしやすさに全振りした設計。120日間の返品トライアル付き。",
+ notFor:"沈み込む柔らかさが好きな人には硬めに感じる。とにかく包まれたい人には不向き。"},
+{cat:"マットレス", name:"コアラマットレス", brand:"Koala", price:"約70,000円〜", tags:["中途覚醒"], keyword:"コアラマットレス",
+ good:"振動が伝わりにくく、隣で寝る人の寝返りで目が覚める人に強い。120日トライアルあり。",
+ notFor:"ウレタン系なので、ベッド下の通気が悪い環境や汗かきの人は湿気対策が必須。硬めのコイル感が好きな人には合わない。"},
+{cat:"マットレス", name:"エマ・スリープ", brand:"Emma Sleep", price:"約60,000円〜", tags:["中途覚醒","肩首"], keyword:"エマスリープ マットレス",
+ good:"3層ウレタンで体圧分散寄り。セール頻度が高く、実売価格が下がりやすい。100日トライアル。",
+ notFor:"体重が重め(目安80kg超)の人は沈み込みが深くなりやすく、硬め志向なら他を検討したい。"},
+{cat:"マットレス", name:"GOKUMIN プレミアムマットレス", brand:"GOKUMIN", price:"約13,000円〜", tags:["肩首"], keyword:"GOKUMIN マットレス 高反発",
+ good:"1万円台で高反発を試せる入門機。今の寝具の上に敷くトッパー的な使い方もできる。",
+ notFor:"耐久性は上位帯に及ばない。「これで数年戦う」つもりの人より「まず高反発が合うか試す」人向け。"},
+
+// --- 寝具・リカバリー ---
+{cat:"寝具・リカバリー", name:"BAKUNE リカバリーウェア", brand:"TENTIAL", price:"約20,000円", tags:["朝つらい"], keyword:"BAKUNE リカバリーウェア 上下",
+ good:"一般医療機器届出の着るタイプ。パジャマを「部屋着の延長」から専用装備に変えると入眠の切り替えスイッチにもなる。",
+ notFor:"締め付けの少ないゆるゆるの服で寝たい人、パジャマに2万円は出せないと感じる人には過剰。"},
+{cat:"寝具・リカバリー", name:"YnM 加重ブランケット", brand:"YnM", price:"約7,000円", tags:["寝つき"], keyword:"YnM 加重ブランケット",
+ good:"体重の約10%の重みで包まれる感覚を作る毛布。「布団に入っても落ち着かない」タイプの人に選ばれている。",
+ notFor:"暑がりの人・閉塞感が苦手な人には逆効果になりやすい。夏場は使いにくい。"},
+{cat:"寝具・リカバリー", name:"ニトリ Nクール 敷きパッド", brand:"ニトリ", price:"約2,000円〜", tags:["暑さ","中途覚醒"], keyword:"ニトリ Nクール 敷きパッド",
+ good:"接触冷感の定番。夏の寝苦しさで夜中に起きる人が最初に試す価格帯として妥当。",
+ notFor:"冷感は「触れた瞬間」が中心で持続はしない。エアコンなしでこれだけで乗り切ろうとすると期待外れになる。"},
+{cat:"寝具・リカバリー", name:"王様の抱き枕", brand:"ビーチ", price:"約9,000円", tags:["いびき","寝つき"], keyword:"王様の抱き枕",
+ good:"横向き寝の姿勢を保ちやすくする抱き枕の定番。妊娠中の体勢サポートにも使われる。",
+ notFor:"ベッドが狭い(セミシングル等)人にはスペースの圧迫が大きい。寝返りで放り出すタイプの人には効果が薄い。"},
+
+// --- 光と環境 ---
+{cat:"光と環境", name:"1級遮光カーテン", brand:"各社", price:"約4,000円〜", tags:["中途覚醒","朝つらい"], keyword:"1級遮光カーテン",
+ good:"朝方の光や街灯で目が覚める人への費用対効果が最も高い投資のひとつ。まずここから。",
+ notFor:"「朝は光で自然に起きたい」人が完全遮光にすると、逆に起きられなくなることがある。光目覚ましとの併用を。"},
+{cat:"光と環境", name:"SwitchBot カーテン", brand:"SwitchBot", price:"約9,000円", tags:["朝つらい"], keyword:"SwitchBot カーテン 3",
+ good:"起床時刻にカーテンを自動で開け、光で起きる環境を作れる。遮光カーテンと組み合わせると「夜は真っ暗・朝は光」が自動化できる。",
+ notFor:"カーテンレールの形状によっては取り付け不可。賃貸でもレール確認は必須。機械の駆動音が気になる人も。"},
+{cat:"光と環境", name:"光目覚まし トトノエライト", brand:"ムーンムーン", price:"約30,000円", tags:["朝つらい"], keyword:"トトノエライト 光目覚まし",
+ good:"音ではなく光の強さで起こすタイプ。冬の暗い朝や、音の目覚ましで心臓に悪い起き方をしている人向け。",
+ notFor:"遮光できていない部屋では効果が薄い。価格が高いので、まず遮光カーテン+スマホの照度確認が先。"},
+{cat:"光と環境", name:"めぐりズム 蒸気でホットアイマスク", brand:"花王", price:"約1,000円", tags:["寝つき"], keyword:"めぐりズム 蒸気でホットアイマスク",
+ good:"約40℃の蒸気で目元を温める使い切りタイプ。スマホを置くきっかけ作りとして優秀。コンビニでも買える手軽さ。",
+ notFor:"使い切りなのでコスパは繰り返し型に劣る。毎晩使うなら充電式のホットアイマスクも検討を。"},
+
+// --- 音と香り ---
+{cat:"音と香り", name:"Dreamegg ホワイトノイズマシン", brand:"Dreamegg", price:"約5,000円", tags:["寝つき","中途覚醒"], keyword:"Dreamegg ホワイトノイズマシン",
+ good:"環境音で外の物音をマスキングする専用機。道路沿い・壁の薄い部屋で音に敏感な人の定番。",
+ notFor:"無音でないと眠れないタイプの人には逆にノイズ。まずスマホのアプリで数日試してからで遅くない。"},
+{cat:"音と香り", name:"無印良品 エッセンシャルオイル おやすみブレンド", brand:"無印良品", price:"約2,000円", tags:["寝つき"], keyword:"無印良品 エッセンシャルオイル おやすみ",
+ good:"ベルガモット等のブレンド。「寝る前にこの香り」を毎晩繰り返すと、入眠の合図として機能しやすい。",
+ notFor:"香りで眠くなる魔法の液体ではない。強い香りが苦手な人、喘息など呼吸器に不安がある人は慎重に。"},
+{cat:"音と香り", name:"Loop Quiet 2 耳栓", brand:"Loop", price:"約3,000円", tags:["中途覚醒"], keyword:"Loop Quiet 耳栓",
+ good:"洗って繰り返し使えるシリコン耳栓。同居人の生活音・いびきで目が覚める側の人の自衛手段。",
+ notFor:"目覚ましの音も減衰する。光目覚ましやスマートウォッチの振動アラームとの併用が前提。"},
+{cat:"音と香り", name:"YOLU カームナイトリペア シャンプー", brand:"YOLU", price:"約1,500円", tags:["寝つき"], keyword:"YOLU カームナイトリペア シャンプー",
+ good:"「夜の入浴を整える」枠。香りの切り替えで入浴→就寝の流れを作る小さな道具として。",
+ notFor:"睡眠グッズとしての直接効果を期待する人には不向き。あくまで夜のルーティン作りの脇役。"},
+
+// --- スリープテック ---
+{cat:"スリープテック", name:"Fitbit Inspire 3", brand:"Google", price:"約13,000円", tags:["朝つらい","記録"], keyword:"Fitbit Inspire 3",
+ good:"睡眠時間と就寝時刻のばらつきを可視化する入門機。振動アラームで同居人を起こさず起きられる。",
+ notFor:"スコアの点数に一喜一憂してしまう人には毒。数字に採点されると余計に眠れなくなるタイプは手を出さない方がいい。"},
+{cat:"スリープテック", name:"SwitchBot ハブ2", brand:"SwitchBot", price:"約9,000円", tags:["暑さ","中途覚醒"], keyword:"SwitchBot ハブ2",
+ good:"就寝中の温湿度を記録し、エアコンを自動制御できる。「夜中に暑くて起きる」の原因を数値で特定できる。",
+ notFor:"赤外線リモコンのない家電は操作不可。設定の初期コストを面倒がる人には宝の持ち腐れ。"},
+{cat:"スリープテック", name:"ブレインスリープ コイン", brand:"BRAIN SLEEP", price:"約9,000円", tags:["いびき","記録"], keyword:"ブレインスリープ コイン",
+ good:"パジャマに装着するタイプで、寝姿勢といびきの計測に寄せた設計。腕時計の装着感が苦手な人の選択肢。",
+ notFor:"心拍系の詳細データはウォッチ型に劣る。運動記録も兼ねたい人はFitbit系へ。"},
+{cat:"スリープテック", name:"チチロバ 温度調整掛け布団", brand:"TITIROBA", price:"約8,000円", tags:["暑さ"], keyword:"チチロバ 掛け布団",
+ good:"通気性重視の掛け布団。「重い羽毛で暑くて起きる」人の乗り換え先として価格が現実的。",
+ notFor:"真冬の保温力は羽毛に劣る。寒がりの人は冬用との2枚体制が前提になる。"}
+];
+
+/* ================= 診断ロジック ================= */
+const TYPES = {
+  A:{name:"🌙 寝つけない夜型", cats:["音と香り","光と環境","寝具・リカバリー"],
+     cause:"布団に入ってからも脳が「昼モード」のまま。寝る直前までの光(特にスマホ)と、切り替えの合図がないことが原因になりやすいタイプです。",
+     tonight:"寝る90分前に部屋の照明を一段落とす。布団の中でスマホを見ないのが無理なら、「充電器を寝室の外に置く」だけでも構造的に変わります。",
+     tools:"香り・温感アイマスク・加重ブランケットなど「入眠の合図」を作る道具と相性がいいタイプです。"},
+  B:{name:"🌗 細切れ睡眠型", cats:["マットレス","光と環境","音と香り"],
+     cause:"眠りに入れてはいるのに、温度・光・音・寝返りのどれかが夜中にあなたを起こしています。原因の特定が先です。",
+     tonight:"「何時ごろ・何がきっかけで起きたか」を3日だけメモしてみてください。暑さなのか、光なのか、音なのかで買うべき道具がまったく変わります。",
+     tools:"遮光カーテン・耳栓・温湿度管理・寝返りしやすいマットレスなど、覚醒の原因を潰す道具が候補です。"},
+  C:{name:"🌑 朝つらい型", cats:["枕","スリープテック","寝具・リカバリー","光と環境"],
+     cause:"時間は寝ているのに疲れが抜けない。就寝時刻のばらつきや、眠りの浅さ、首まわりの合わない寝具が疑われるタイプです。",
+     tonight:"今夜からできるのは「起きる時刻を固定する」こと。寝る時刻より起きる時刻を揃える方が、体内時計は整いやすいです。",
+     tools:"睡眠の記録(スリープテック)で実態を可視化しつつ、枕と光目覚ましを見直す組み合わせが定番です。"},
+  D:{name:"🌘 体が悲鳴型", cats:["マットレス","枕","寝具・リカバリー"],
+     cause:"朝起きたときの首・肩・腰の重さは、寝具と体格のミスマッチが最有力。柔らかすぎ・硬すぎのどちらでも起きます。",
+     tonight:"今の敷き布団に仰向けで寝て、腰と床の間に手がスカスカ入るなら硬すぎ、体が「くの字」に沈むなら柔らかすぎのサインです。",
+     tools:"トライアル期間(返品保証)のあるマットレスから試すのが鉄則。枕は寝姿勢(仰向け/横向き)に合わせて選びます。"}
+};
+
+const QUESTIONS = [
+ {q:"布団に入ってから、眠りにつくまでどれくらいかかりますか?",
+  o:[["15分以内。眠ること自体は早い","B"],["30分〜1時間はかかる","A"],["1時間以上、目が冴えてしまう","A"],["眠れるが、朝の疲れが取れない","C"]]},
+ {q:"夜中に目が覚めることはありますか?",
+  o:[["ほぼない。朝まで通しで眠れる","C"],["ときどき。トイレや物音で","B"],["ほぼ毎晩1回以上、目が覚める","B"],["目は覚めないが、体が痛くて寝返りが多い","D"]]},
+ {q:"朝、目覚めたときの状態に一番近いのは?",
+  o:[["わりとすっきり起きられる","A"],["眠いが、動き出せば普通","B"],["何時間寝ても、鉛のようにだるい","C"],["首・肩・腰のどこかが痛い/重い","D"]]},
+ {q:"寝る直前(布団の中を含む)のスマホは?",
+  o:[["ほぼ見ない","D"],["少し見るが30分以内","B"],["気づくと1時間以上見ている","A"],["見ながらそのまま寝落ちする","A"]]},
+ {q:"今の寝具(枕・マットレス)について正直なところは?",
+  o:[["合っていると思う","A"],["特に考えたことがない","C"],["なんとなく合っていない気がする","D"],["安物のまま何年も使っている","D"]]},
+ {q:"夏場・暑い日の夜はどうですか?",
+  o:[["季節に関係なく眠れる/眠れない","A"],["暑さで何度も起きる","B"],["暑くて寝つきが特に悪くなる","A"],["特に気にしたことがない","C"]]},
+ {q:"日中の運動・カフェインの習慣は?",
+  o:[["夕方以降によく体を動かす","A"],["コーヒー・お茶を夕方以降も飲む","A"],["ほぼ運動しない/デスクワーク中心","D"],["特に偏りはない","C"]]}
+];
+
+const score={A:0,B:0,C:0,D:0};
+let qIndex=0;
+const quizBody=document.getElementById('quizBody');
+const qProgress=document.getElementById('qProgress');
+const moonFill=document.getElementById('moonFill');
+
+function renderQ(){
+  qProgress.textContent=`QUESTION ${qIndex+1} / ${QUESTIONS.length}`;
+  moonFill.setAttribute('y', 60 - (qIndex/QUESTIONS.length)*60);
+  const {q,o}=QUESTIONS[qIndex];
+  quizBody.innerHTML=`<p class="q-text">${q}</p><div class="q-opts">${
+    o.map((op,i)=>`<button type="button" data-t="${op[1]}">${op[0]}</button>`).join('')
+  }</div>`;
+  quizBody.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      score[b.dataset.t]++;
+      qIndex++;
+      qIndex<QUESTIONS.length ? renderQ() : renderResult();
+    });
+  });
+}
+
+// 複合タイプ(2軸が拮抗している場合の合成テキスト)
+const COMBO_NOTE = {
+  cause:"実は、2つのタイプの特徴が同じくらい強く出ています。単独の原因ではなく、複数の要因が重なっている可能性が高いタイプです。",
+  tonightJoin:"まずはどちらか一方、着手しやすい方から1つだけ試してください。同時に全部変えると、何が効いたのか分からなくなります。"
+};
+
+function renderResult(){
+  moonFill.setAttribute('y',0);
+  qProgress.textContent='RESULT';
+  const sorted=Object.keys(score).sort((a,b)=>score[b]-score[a]);
+  const [k1,k2]=sorted;
+  const isCombo = score[k2]>0 && (score[k1]-score[k2])<=1 && score[k1]<QUESTIONS.length;
+  const t1=TYPES[k1];
+
+  let bodyHtml;
+  if(isCombo){
+    const t2=TYPES[k2];
+    const catsSet=[...new Set([...t1.cats,...t2.cats])];
+    bodyHtml=`
+      <p style="font-size:.8rem;letter-spacing:.2em;color:var(--lavender)">あなたの睡眠タイプ(複合)</p>
+      <p class="result-type">${t1.name} × ${t2.name}</p>
+      <div class="result-block">
+        <h4>なにが起きているか(仮説)</h4><p>${COMBO_NOTE.cause}</p>
+        <h4>${t1.name} 側の要因</h4><p>${t1.cause}</p>
+        <h4>${t2.name} 側の要因</h4><p>${t2.cause}</p>
+        <h4>今夜からできる、お金のかからないこと</h4><p>${COMBO_NOTE.tonightJoin}<br>・${t1.name}向け: ${t1.tonight}<br>・${t2.name}向け: ${t2.tonight}</p>
+        <h4>頼っていい道具</h4><p>${t1.tools}</p>
+      </div>
+      <div class="hero-actions" style="margin-top:26px">
+        <a class="btn btn-primary" href="#products" id="goProducts">両タイプ向けのグッズを見る</a>
+      </div>
+      <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
+      <button class="restart" type="button" id="restart">もう一度診断する</button>`;
+    quizBody.innerHTML=bodyHtml;
+    document.getElementById('goProducts').addEventListener('click',()=>filterByCats(catsSet,`${t1.name} × ${t2.name}`));
+  } else {
+    bodyHtml=`
+      <p style="font-size:.8rem;letter-spacing:.2em;color:var(--lavender)">あなたの睡眠タイプ</p>
+      <p class="result-type">${t1.name}</p>
+      <div class="result-block">
+        <h4>なにが起きているか(仮説)</h4><p>${t1.cause}</p>
+        <h4>今夜からできる、お金のかからないこと</h4><p>${t1.tonight}</p>
+        <h4>頼っていい道具</h4><p>${t1.tools}</p>
+      </div>
+      <div class="hero-actions" style="margin-top:26px">
+        <a class="btn btn-primary" href="#products" id="goProducts">このタイプ向けのグッズを見る</a>
+      </div>
+      <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
+      <button class="restart" type="button" id="restart">もう一度診断する</button>`;
+    quizBody.innerHTML=bodyHtml;
+    document.getElementById('goProducts').addEventListener('click',()=>filterByCats(t1.cats,t1.name));
+  }
+  document.getElementById('restart').addEventListener('click',()=>{
+    for(const k in score)score[k]=0; qIndex=0; renderQ();
+  });
+}
+renderQ();
+
+/* ================= 商品グリッド ================= */
+const CATS=["すべて","枕","マットレス","寝具・リカバリー","光と環境","音と香り","スリープテック"];
+const grid=document.getElementById('grid');
+const filters=document.getElementById('filters');
+const tagNote=document.getElementById('tagNote');
+
+// AFFILIATE_MAP: update_prices.py が出力する *.affiliate-map.json の中身を
+// ここに貼り付けると、card() が実アフィリURLを優先して使うようになる。
+// (Claude Codeでのビルド時にこのオブジェクトへJSON内容を流し込む想定)
+const AFFILIATE_MAP = {};
+function rakutenUrl(k){
+  if(AFFILIATE_MAP[k]) return AFFILIATE_MAP[k];
+  return "https://search.rakuten.co.jp/search/mall/"+encodeURIComponent(k)+"/";
+}
+
+function card(p){
+  return `<article class="card" data-cat="${p.cat}">
+    <span class="cat">${p.cat}</span>
+    <h3>${p.name}</h3>
+    <span class="brand">${p.brand}/ 価格目安 <span class="price">${p.price}</span></span>
+    <p class="good">${p.good}</p>
+    <p class="notfor"><b>向かない人:</b> ${p.notFor}</p>
+    <div class="tags">${p.tags.map(t=>`<i>#${t}</i>`).join('')}</div>
+    <a class="buy" href="${rakutenUrl(p.keyword)}" target="_blank" rel="nofollow sponsored noopener" data-keyword="${p.keyword}">楽天で最新価格を見る →</a>
+  </article>`;
+}
+grid.innerHTML=PRODUCTS.map(card).join('');
+
+filters.innerHTML=CATS.map((c,i)=>`<button type="button" class="${i===0?'active':''}" data-c="${c}">${c}</button>`).join('');
+filters.querySelectorAll('button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    tagNote.textContent='';
+    const c=b.dataset.c;
+    grid.querySelectorAll('.card').forEach(el=>{
+      el.classList.toggle('dim', c!=="すべて" && el.dataset.cat!==c);
+    });
+  });
+});
+
+function filterByCats(cats,typeName){
+  filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+  tagNote.textContent=`${typeName} の診断結果にもとづいて、相性のよいカテゴリだけを表示しています。「すべて」で解除できます。`;
+  grid.querySelectorAll('.card').forEach(el=>{
+    el.classList.toggle('dim', !cats.includes(el.dataset.cat));
+  });
+}
+
+/* ================= 星空 ================= */
+const stars=document.getElementById('stars');
+for(let i=0;i<40;i++){
+  const s=document.createElement('span');
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=(Math.random()*4)+'s';
+  stars.appendChild(s);
+}
+</script>
+</body>
+</html>
