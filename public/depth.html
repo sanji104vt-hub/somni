@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>眠りの深さで選ぶ睡眠グッズ | Somni Depth</title>
+<meta name="description" content="睡眠段階ごとに選ぶ、新しい睡眠グッズの探し方。眠りの深さに潜るように、あなたに必要な一つを見つける。">
+<meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
+<link rel="canonical" href="https://somni.sanji-104vt.workers.dev/depth.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="眠りの深さで選ぶ睡眠グッズ | Somni Depth">
+<meta property="og:description" content="睡眠段階ごとに選ぶ、新しい睡眠グッズの探し方。眠りの深さに潜るように、あなたに必要な一つを見つける。">
+<meta property="og:url" content="https://somni.sanji-104vt.workers.dev/depth.html">
+<meta property="og:site_name" content="Somni">
+<!-- TODO: og:image 未生成。OGP画像(1200x630)を用意でき次第 <meta property="og:image"> を追加する -->
+<meta name="twitter:card" content="summary">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L6WT832DW8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L6WT832DW8');
+</script>
+<script>
+function track(eventName, params){
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params);
+  } else {
+    console.debug('[track:noop]', eventName, params);
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Somni", "item": "https://somni.sanji-104vt.workers.dev/"},
+    {"@type": "ListItem", "position": 2, "name": "眠りの深さで選ぶ睡眠グッズ", "item": "https://somni.sanji-104vt.workers.dev/depth.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "睡眠段階別 睡眠グッズリスト",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "めぐりズム 蒸気でホットアイマスク", "url": "https://item.rakuten.co.jp/pupuhima/h4901301460547-6/"},
+    {"@type": "ListItem", "position": 2, "name": "ポンパドール カモミールティー", "url": "https://item.rakuten.co.jp/p-tano/767-8943/"},
+    {"@type": "ListItem", "position": 3, "name": "ヒツジのいらない枕 至極", "url": "https://item.rakuten.co.jp/33taiyo/hitsuji/"},
+    {"@type": "ListItem", "position": 4, "name": "昭和西川 ホワイトダック羽毛布団", "url": "https://item.rakuten.co.jp/soleine/3011300017az92111/"},
+    {"@type": "ListItem", "position": 5, "name": "無印良品 脇に縫い目のないパジャマ", "url": "https://item.rakuten.co.jp/mujirushi-ryohin/4550584971525/"},
+    {"@type": "ListItem", "position": 6, "name": "コアラマットレス", "url": "https://item.rakuten.co.jp/koalasleep/101-0035/"},
+    {"@type": "ListItem", "position": 7, "name": "Loop Quiet 2 耳栓", "url": "https://item.rakuten.co.jp/loopjapan/en-qt-2/"},
+    {"@type": "ListItem", "position": 8, "name": "無印良品 超音波うるおいアロマディフューザー", "url": "https://item.rakuten.co.jp/mujirushi-ryohin/4550344554586/"},
+    {"@type": "ListItem", "position": 9, "name": "光目覚まし トトノエライト", "url": "https://item.rakuten.co.jp/moonmoon/inti-sq-02/"}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --c-dusk:#131A33;      /* 宵 */
+    --c-night:#0B1026;     /* 深宵 */
+    --c-abyss:#05060F;     /* 深淵 */
+    --c-dawn:#2E3A5C;      /* 暁 */
+    --c-moon:#A7C7FF;      /* 月光 */
+    --c-lamp:#E8C99A;      /* 灯り */
+    --c-text:#E9ECF5;
+    --c-text-dim:#8B93AD;
+    --font-display:'Zen Old Mincho',serif;
+    --font-body:'Zen Kaku Gothic New',sans-serif;
+    --font-mono:'Space Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    color:var(--c-text);
+    background:var(--c-dusk);
+    overflow-x:hidden;
+    line-height:1.9;
+    transition:background-color .1s linear;
+  }
+  /* ===== 3D背景キャンバス ===== */
+  #bg3d{position:fixed;inset:0;z-index:0;pointer-events:none}
+  /* WebGLフォールバック */
+  .no-webgl #bg3d{display:none}
+  .no-webgl body{background:linear-gradient(180deg,#131A33,#05060F)}
+
+  /* ===== 深度ゲージ(シグネチャー要素) ===== */
+  #gauge{
+    position:fixed;left:18px;top:50%;transform:translateY(-50%);
+    z-index:20;height:62vh;width:64px;
+    display:flex;flex-direction:column;align-items:flex-start;
+  }
+  #gauge svg{height:100%;width:34px;overflow:visible}
+  #gauge .track{stroke:rgba(167,199,255,.18);stroke-width:1.5;fill:none}
+  #gauge .hypno{stroke:var(--c-moon);stroke-width:1.5;fill:none;opacity:.85}
+  #gauge .marker{fill:var(--c-lamp);r:4;filter:drop-shadow(0 0 6px var(--c-lamp))}
+  #gaugeLabel{
+    position:absolute;left:44px;top:0;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+    color:var(--c-moon);white-space:nowrap;
+    transform:translateY(-50%);transition:top .15s ease-out;
+  }
+  #gaugeLabel .stage{
+    display:block;font-family:var(--font-display);font-size:13px;
+    color:var(--c-text);letter-spacing:.2em;margin-top:2px;
+  }
+  @media(max-width:720px){
+    #gauge{left:8px;height:50vh;width:52px}
+    #gaugeLabel{font-size:9px}
+    #gaugeLabel .stage{font-size:11px}
+  }
+
+  /* ===== レイアウト ===== */
+  main{position:relative;z-index:10}
+  section{
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:14vh 8vw 14vh calc(8vw + 70px);
+    max-width:1100px;margin:0 auto;
+  }
+  @media(max-width:720px){section{padding:12vh 6vw 12vh calc(6vw + 58px)}}
+
+  .depth-tag{
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.25em;
+    color:var(--c-moon);margin-bottom:18px;
+  }
+  .depth-tag::before{content:"";display:inline-block;width:28px;height:1px;background:var(--c-moon);vertical-align:middle;margin-right:12px;opacity:.5}
+  h1,h2{font-family:var(--font-display);font-weight:700;letter-spacing:.06em}
+  h1{font-size:clamp(30px,5.4vw,58px);line-height:1.5}
+  h2{font-size:clamp(22px,3.4vw,36px);line-height:1.6;margin-bottom:14px}
+  .lead{color:var(--c-text-dim);font-size:clamp(14px,1.5vw,16px);max-width:34em;margin-top:16px}
+
+  /* ===== ヒーロー ===== */
+  #hero{align-items:flex-start;text-align:left}
+  #hero .brand{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:.5em;
+    color:var(--c-lamp);margin-bottom:26px;
+  }
+  #hero .scroll-hint{
+    margin-top:9vh;font-family:var(--font-mono);font-size:11px;
+    letter-spacing:.3em;color:var(--c-text-dim);
+    display:flex;align-items:center;gap:14px;
+  }
+  #hero .scroll-hint::after{
+    content:"";width:1px;height:52px;
+    background:linear-gradient(180deg,var(--c-moon),transparent);
+    animation:sink 2.6s ease-in-out infinite;
+  }
+  @keyframes sink{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(14px);opacity:.3}}
+
+  /* ===== 商品カード(3Dチルト) ===== */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:44px;perspective:900px}
+  .card{
+    position:relative;border-radius:14px;padding:24px 22px 22px;
+    background:linear-gradient(160deg,rgba(167,199,255,.07),rgba(167,199,255,.02));
+    border:1px solid rgba(167,199,255,.16);
+    transform-style:preserve-3d;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
+    will-change:transform;
+    cursor:pointer;
+    display:block;text-decoration:none;color:inherit;
+  }
+  .card:hover,.card:focus-visible{
+    border-color:rgba(232,201,154,.55);
+    box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 24px rgba(232,201,154,.08);
+  }
+  .card:focus-visible{outline:2px solid var(--c-lamp);outline-offset:3px}
+  .card .cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.28em;color:var(--c-lamp);margin-bottom:10px}
+  .card .thumb{
+    width:84px;height:84px;background:#fff;border-radius:10px;
+    box-shadow:0 8px 22px rgba(0,0,0,.35);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+    transform:translateZ(30px);
+  }
+  .card .thumb img{width:100%;height:100%;object-fit:contain;padding:8px}
+  .card h3{font-family:var(--font-display);font-size:19px;letter-spacing:.08em;margin-bottom:8px;transform:translateZ(24px)}
+  .card p{font-size:13px;color:var(--c-text-dim);line-height:1.8;transform:translateZ(12px)}
+  .card .price{font-family:var(--font-mono);font-size:12px;color:var(--c-lamp);margin-top:8px;transform:translateZ(12px)}
+  .card .why{
+    margin-top:14px;padding-top:12px;font-size:12px;color:var(--c-moon);
+    border-top:1px dashed rgba(167,199,255,.22);
+  }
+  .card .why b{font-weight:500;color:var(--c-text)}
+
+  /* ===== 朝のセクション(浮上) ===== */
+  #dawn{text-align:center;align-items:center}
+  #dawn h2{color:#F3EEDC}
+  #dawn .lead{margin-left:auto;margin-right:auto}
+  .cta{
+    display:inline-block;margin-top:38px;padding:16px 46px;border-radius:999px;
+    font-family:var(--font-display);font-size:16px;letter-spacing:.22em;
+    color:#1A2240;background:linear-gradient(120deg,#F3E7C8,#E8C99A);
+    text-decoration:none;border:none;
+    box-shadow:0 8px 34px rgba(232,201,154,.35);
+    transition:transform .3s,box-shadow .3s;
+  }
+  .cta:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(232,201,154,.5)}
+  .cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+  footer{
+    position:relative;z-index:10;text-align:center;
+    padding:40px 20px 60px;font-family:var(--font-mono);
+    font-size:11px;letter-spacing:.2em;color:var(--c-text-dim);
+  }
+
+  /* リビール */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<canvas id="bg3d" aria-hidden="true"></canvas>
+
+<!-- 深度ゲージ:ヒプノグラム形状のトラックを現在地マーカーが降下する -->
+<nav id="gauge" aria-label="睡眠の深度">
+  <svg viewBox="0 0 34 400" preserveAspectRatio="none" aria-hidden="true">
+    <line class="track" x1="17" y1="0" x2="17" y2="400"/>
+    <!-- ヒプノグラム(睡眠段階の遷移を模した折れ線) -->
+    <path class="hypno" d="M17,0 L17,50 L28,70 L28,120 L8,145 L8,210 L24,235 L24,300 L12,325 L12,400"/>
+    <circle class="marker" id="gm" cx="17" cy="0"/>
+  </svg>
+  <div id="gaugeLabel"><span id="gTime">+0 min</span><span class="stage" id="gStage">就寝前</span></div>
+</nav>
+
+<main>
+  <section id="hero">
+    <div class="brand">SOMNI — DEPTH</div>
+    <h1>眠りには、<br>深さがある。</h1>
+    <p class="lead">ひと晩の眠りは、浅瀬から深淵へ、そしてまた浅瀬へ。約90分の周期で潜っては浮かぶ、静かな航海です。このページは、その深さに沿って睡眠グッズを並べました。下へ、潜るように。</p>
+    <div class="scroll-hint">DIVE</div>
+  </section>
+
+  <section data-depth="0" data-stage="就寝前" data-min="+0 min" data-bg="#131A33">
+    <div class="depth-tag reveal">SURFACE ｜ 就寝前</div>
+    <h2 class="reveal">灯りを落とす前の、ならし時間。</h2>
+    <p class="lead reveal">眠りに入る前の30分は、体温と光を静かに下げていく時間。この時間帯に使うものから、眠りの質は始まります。</p>
+    <div class="cards">
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00q9fkn.k90d6c81.g00q9fkn.k90d7f29/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpupuhima%2Fh4901301460547-6%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpupuhima%2Fi%2F10055595%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'就寝前',item_name:'めぐりズム 蒸気でホットアイマスク'})">
+        <div class="cat">EYE CARE</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/pupuhima/cabinet/h4901301460547-6.jpg?_ex=200x200" alt="めぐりズム 蒸気でホットアイマスク" loading="lazy" width="84" height="84"></div>
+        <h3>ホットアイマスク</h3>
+        <p>目もとをじんわり温めて、一日中働いた目のスイッチを切る。</p>
+        <div class="price">めぐりズム 蒸気でホットアイマスク ｜ 約1,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 就寝前のリラックス習慣として使われるアイテムです。</div>
+      </a>
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00qpdqn.k90d6ff4.g00qpdqn.k90d7a10/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fp-tano%2F767-8943%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fp-tano%2Fi%2F10549513%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'就寝前',item_name:'ポンパドール カモミールティー'})">
+        <div class="cat">HERBAL TEA</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/p-tano/cabinet/shohin700_02/767-8943.jpg?_ex=200x200" alt="ポンパドール カモミールティー" loading="lazy" width="84" height="84"></div>
+        <h3>ノンカフェインティー</h3>
+        <p>カモミールやルイボスなど、夜のためのブレンドを一杯。</p>
+        <div class="price">ポンパドール カモミールティー ｜ 約500円</div>
+        <div class="why"><b>この深度で使う理由</b> — カフェインを含まない、就寝前の定番の飲みものです。</div>
+      </a>
+    </div>
+  </section>
+
+  <section data-depth="1" data-stage="入眠期 N1" data-min="+10 min" data-bg="#0E1430">
+    <div class="depth-tag reveal">N1 ｜ 入眠期</div>
+    <h2 class="reveal">意識がほどけていく、最初の数分。</h2>
+    <p class="lead reveal">うとうとと意識が遠のく入眠期。ここで首と後頭部を預ける場所が、その夜の潜り方を左右します。</p>
+    <div class="cards">
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00tnhln.k90d627e.g00tnhln.k90d754d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2F33taiyo%2Fhitsuji%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2F33taiyo%2Fi%2F10000020%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'入眠期 N1',item_name:'ヒツジのいらない枕 至極'})">
+        <div class="cat">PILLOW</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/33taiyo/cabinet/campaign/sale_daiichi/260705/hitsuji.jpg?_ex=200x200" alt="ヒツジのいらない枕 至極" loading="lazy" width="84" height="84"></div>
+        <h3>枕</h3>
+        <p>高さ・硬さ・素材。首のカーブに合う一つを、寝姿勢から選ぶ。</p>
+        <div class="price">ヒツジのいらない枕 至極 ｜ 約16,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 寝入りばなに最初に体重を預けるのが枕だからです。</div>
+      </a>
+    </div>
+  </section>
+
+  <section data-depth="2" data-stage="浅い眠り N2" data-min="+30 min" data-bg="#0B1026">
+    <div class="depth-tag reveal">N2 ｜ 浅い眠り</div>
+    <h2 class="reveal">体温がゆっくり下がっていく層。</h2>
+    <p class="lead reveal">眠りの大半を占める浅睡眠。寝床の中の温度と湿度——「寝床内気候」を整える寝具の出番です。</p>
+    <div class="cards">
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00qf60n.k90d60d6.g00qf60n.k90d70fd/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsoleine%2F3011300017az92111%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsoleine%2Fi%2F10008248%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'浅い眠り N2',item_name:'昭和西川 ホワイトダック羽毛布団'})">
+        <div class="cat">DUVET</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/soleine/cabinet/07592151/08628578/imgrc0149419692.jpg?_ex=200x200" alt="昭和西川 ホワイトダック羽毛布団" loading="lazy" width="84" height="84"></div>
+        <h3>掛け布団</h3>
+        <p>季節と体質に合わせた保温と放湿のバランスで選ぶ。</p>
+        <div class="price">昭和西川 ホワイトダック羽毛布団 ｜ 約20,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 眠っている間の温度環境を担う寝具だからです。</div>
+      </a>
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00tpdhn.k90d63ea.g00tpdhn.k90d7648/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550584971525%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmujirushi-ryohin%2Fi%2F10009482%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'浅い眠り N2',item_name:'無印良品 脇に縫い目のないパジャマ'})">
+        <div class="cat">SLEEPWEAR</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mujirushi-ryohin/cabinet/item49/4550584971563.jpg?_ex=200x200" alt="無印良品 脇に縫い目のないパジャマ" loading="lazy" width="84" height="84"></div>
+        <h3>パジャマ</h3>
+        <p>肌に一番近い一枚。吸湿性と締めつけのなさを最優先に。</p>
+        <div class="price">無印良品 脇に縫い目のないパジャマ ｜ 約4,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 寝返りと汗に、ひと晩じゅう付き合う一枚だからです。</div>
+      </a>
+    </div>
+  </section>
+
+  <section data-depth="3" data-stage="深い眠り N3" data-min="+60 min" data-bg="#05060F">
+    <div class="depth-tag reveal">N3 ｜ 深い眠り</div>
+    <h2 class="reveal">いちばん深い、いちばん静かな底。</h2>
+    <p class="lead reveal">脳も体も休息する深睡眠。体を面で支えるものと、音を遠ざけるものが、この深さを守ります。</p>
+    <div class="cards">
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00u6p1n.k90d6b53.g00u6p1n.k90d791c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkoalasleep%2F101-0035%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkoalasleep%2Fi%2F10000545%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'深い眠り N3',item_name:'コアラマットレス'})">
+        <div class="cat">MATTRESS</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/koalasleep/cabinet/10124255/10124257/10124271/imgrc0117299167.jpg?_ex=200x200" alt="コアラマットレス" loading="lazy" width="84" height="84"></div>
+        <h3>マットレス</h3>
+        <p>体圧分散と寝返りのしやすさ。一晩の土台になる一枚。</p>
+        <div class="price">コアラマットレス ｜ 約70,000円〜</div>
+        <div class="why"><b>この深度で使う理由</b> — 長時間、同じ姿勢で体を支え続ける土台だからです。</div>
+      </a>
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00ukcgn.k90d6aa3.g00ukcgn.k90d7fde/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Floopjapan%2Fen-qt-2%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Floopjapan%2Fi%2F10000023%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'深い眠り N3',item_name:'Loop Quiet 2 耳栓'})">
+        <div class="cat">SOUND</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/loopjapan/cabinet/12976344/13099317/13099359/imgrc0111241316.jpg?_ex=200x200" alt="Loop Quiet 2 耳栓" loading="lazy" width="84" height="84"></div>
+        <h3>耳栓・ホワイトノイズ</h3>
+        <p>生活音や環境音をやわらげて、静けさをつくる。</p>
+        <div class="price">Loop Quiet 2 耳栓 ｜ 約3,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 夜間の物音対策として使われるアイテムだからです。</div>
+      </a>
+    </div>
+  </section>
+
+  <section data-depth="4" data-stage="レム睡眠" data-min="+90 min" data-bg="#111A3D">
+    <div class="depth-tag reveal">REM ｜ 浮上と夢</div>
+    <h2 class="reveal">夢を見ながら、朝へ浮かんでいく。</h2>
+    <p class="lead reveal">明け方に増えるレム睡眠。ここから先は、目覚めの準備の時間。香りと光が、浮上をやさしくします。</p>
+    <div class="cards">
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00tpdhn.k90d63ea.g00tpdhn.k90d7648/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmujirushi-ryohin%2F4550344554586%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmujirushi-ryohin%2Fi%2F10004262%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'レム睡眠',item_name:'無印良品 超音波うるおいアロマディフューザー'})">
+        <div class="cat">AROMA</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/mujirushi-ryohin/cabinet/item13/4550344554586.jpg?_ex=200x200" alt="無印良品 超音波うるおいアロマディフューザー" loading="lazy" width="84" height="84"></div>
+        <h3>アロマ・ピローミスト</h3>
+        <p>寝室の空気に、自分の合図になる香りをひとつ。</p>
+        <div class="price">無印良品 超音波うるおいアロマディフューザー ｜ 約5,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 寝室の環境づくりに使われる定番アイテムだからです。</div>
+      </a>
+      <a class="card reveal" tabindex="0" href="https://hb.afl.rakuten.co.jp/hgc/g00rfzin.k90d6c4f.g00rfzin.k90d78ec/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmoonmoon%2Finti-sq-02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmoonmoon%2Fi%2F10000043%2F&rafcid=wsc_i_is_61d0a5bf-4dbe-4234-bc6e-ab83c7342ed6" target="_blank" rel="nofollow sponsored noopener" onclick="track('depth_card_click',{category:'レム睡眠',item_name:'光目覚まし トトノエライト'})">
+        <div class="cat">LIGHT</div>
+        <div class="thumb"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/moonmoon/cabinet/totonoe-light-plain/1026_a.jpg?_ex=200x200" alt="光目覚まし トトノエライト" loading="lazy" width="84" height="84"></div>
+        <h3>光目覚まし</h3>
+        <p>音ではなく、夜明けのような光で起きるという選択肢。</p>
+        <div class="price">光目覚まし トトノエライト ｜ 約30,000円</div>
+        <div class="why"><b>この深度で使う理由</b> — 朝の浮上をサポートする位置づけのアイテムだからです。</div>
+      </a>
+    </div>
+  </section>
+
+  <section id="dawn" data-depth="5" data-stage="起床" data-min="AM 6:30" data-bg="#2E3A5C">
+    <div class="depth-tag reveal" style="justify-content:center">SURFACE ｜ 朝</div>
+    <h2 class="reveal">おかえりなさい、水面へ。</h2>
+    <p class="lead reveal">あなたの眠りは、どの深さでつまずいていますか。7つの質問で、あなたの睡眠タイプと、いま必要な一つを診断します。</p>
+    <a class="cta reveal" href="/#quiz" onclick="track('depth_cta_click',{})">睡眠タイプを診断する</a>
+  </section>
+</main>
+
+<footer>SOMNI — SLEEP DEPTH GUIDE</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== 深度に応じた背景色補間 ===== */
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[data-bg]'));
+  function hexToRgb(h){var n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+  function lerp(a,b,t){return a+(b-a)*t}
+  var stops = sections.map(function(s){return{el:s,rgb:hexToRgb(s.dataset.bg)}});
+  var heroRgb = hexToRgb('#131A33');
+  var currentBg = heroRgb.slice();
+
+  /* ===== 深度ゲージ ===== */
+  var gm = document.getElementById('gm');
+  var gTime = document.getElementById('gTime');
+  var gStage = document.getElementById('gStage');
+  var gLabel = document.getElementById('gaugeLabel');
+
+  function onScroll(){
+    var vh = window.innerHeight;
+    var mid = window.scrollY + vh*0.5;
+    var docH = document.body.scrollHeight - vh;
+    var p = docH>0 ? Math.min(1, Math.max(0, window.scrollY/docH)) : 0;
+
+    /* ゲージのマーカー位置 */
+    var gy = p*400;
+    gm.setAttribute('cy', gy);
+    gLabel.style.top = (p*100)+'%';
+
+    /* 現在のセクション */
+    var active = null;
+    for(var i=0;i<sections.length;i++){
+      var r = sections[i].getBoundingClientRect();
+      var top = r.top + window.scrollY;
+      if(mid >= top) active = sections[i];
+    }
+    if(active){
+      gTime.textContent = active.dataset.min;
+      gStage.textContent = active.dataset.stage;
+    }else{
+      gTime.textContent = '+0 min'; gStage.textContent = '就寝前';
+    }
+
+    /* 背景色補間 */
+    var target = heroRgb;
+    if(active){
+      var idx = sections.indexOf(active);
+      var r2 = active.getBoundingClientRect();
+      var segTop = r2.top + window.scrollY;
+      var segH = r2.height || 1;
+      var t = Math.min(1, Math.max(0,(mid - segTop)/segH));
+      var a = stops[idx].rgb;
+      var b = (idx < stops.length-1) ? stops[idx+1].rgb : a;
+      target = [lerp(a[0],b[0],t), lerp(a[1],b[1],t), lerp(a[2],b[2],t)];
+    }
+    currentBg = target;
+    document.body.style.backgroundColor = 'rgb('+(target[0]|0)+','+(target[1]|0)+','+(target[2]|0)+')';
+    depthProgress = p;
+  }
+  var depthProgress = 0;
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ===== リビール ===== */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ===== depth_stage_view: 各セクションが50%可視化されたら1回だけ発火 ===== */
+  var stageIo = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        track('depth_stage_view', { stage: e.target.dataset.stage });
+        stageIo.unobserve(e.target);
+      }
+    });
+  }, {threshold:.5});
+  sections.forEach(function(s){ stageIo.observe(s); });
+
+  /* ===== 商品カード3Dチルト ===== */
+  if(!reduced){
+    document.querySelectorAll('.card').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left)/r.width - .5;
+        var y = (e.clientY - r.top)/r.height - .5;
+        card.style.transform = 'rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) translateZ(6px)';
+      });
+      card.addEventListener('mouseleave', function(){ card.style.transform=''; });
+    });
+  }
+
+  /* ===== Three.js:月と気泡(深いほど粒が減り、遅くなる) ===== */
+  var canvas = document.getElementById('bg3d');
+  var gl = canvas.getContext && (canvas.getContext('webgl')||canvas.getContext('experimental-webgl'));
+  if(!gl || typeof THREE === 'undefined'){ document.documentElement.classList.add('no-webgl'); return; }
+
+  var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, .1, 100);
+  camera.position.z = 8;
+
+  /* 月:点描のスフィア */
+  var moonGeo = new THREE.SphereGeometry(2.1, 40, 40);
+  var moonMat = new THREE.PointsMaterial({color:0xA7C7FF, size:0.022, transparent:true, opacity:.85});
+  var moon = new THREE.Points(moonGeo, moonMat);
+  moon.position.set(3.4, 2.2, -3);
+  scene.add(moon);
+
+  /* 気泡パーティクル */
+  var N = 500;
+  var pos = new Float32Array(N*3);
+  var spd = new Float32Array(N);
+  for(var i=0;i<N;i++){
+    pos[i*3]   = (Math.random()-.5)*22;
+    pos[i*3+1] = (Math.random()-.5)*16;
+    pos[i*3+2] = (Math.random()-.5)*10 - 2;
+    spd[i] = .002 + Math.random()*.006;
+  }
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  var pMat = new THREE.PointsMaterial({color:0xCBDEFF, size:.045, transparent:true, opacity:.55});
+  var particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
+
+  function resize(){
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize); resize();
+
+  var t = 0;
+  function tick(){
+    requestAnimationFrame(tick);
+    if(reduced){ renderer.render(scene,camera); return; }
+    t += .008;
+    /* 深いほど遅く・まばらに:深さを密度で語る */
+    var slow = 1 - depthProgress*.75;
+    var arr = pGeo.attributes.position.array;
+    for(var i=0;i<N;i++){
+      arr[i*3+1] += spd[i]*slow;                 /* ゆっくり浮上 */
+      arr[i*3]   += Math.sin(t + i)*.0006;        /* 揺らぎ */
+      if(arr[i*3+1] > 8) arr[i*3+1] = -8;
+    }
+    pGeo.attributes.position.needsUpdate = true;
+    pMat.opacity = .55*(1 - depthProgress*.6);   /* 深淵で粒を消していく */
+    moon.rotation.y += .0012;
+    moonMat.opacity = .85*(1 - depthProgress*.9); /* 月は深く潜ると見えなくなる */
+    /* 暁で月光色→灯り色へ */
+    camera.position.y = -depthProgress*1.2;
+    renderer.render(scene, camera);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
