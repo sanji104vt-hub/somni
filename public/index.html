@@ -267,7 +267,27 @@ footer .logo{font-size:1.05rem}
       <a class="btn btn-primary" href="#quiz">3分の睡眠タイプ診断へ</a>
       <a class="btn btn-ghost" href="#products">先にグッズ一覧を見る</a>
     </div>
-    <p style="margin-top:18px"><a href="/depth.html" style="color:var(--amber-soft);font-size:.85rem">眠りの深さで選ぶ →</a></p>
+  </div>
+</section>
+
+<!-- ===== DEPTH PROMO ===== -->
+<section id="depth-promo" aria-label="眠りの深さで探す">
+  <div class="wrap">
+    <span class="eyebrow">Depth Guide</span>
+    <article class="card" style="max-width:640px">
+      <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+        <svg width="34" height="120" viewBox="0 0 34 120" aria-hidden="true" style="flex:0 0 auto">
+          <line x1="17" y1="0" x2="17" y2="120" stroke="rgba(232,201,160,.25)" stroke-width="1.5"/>
+          <path d="M17,0 L17,15 L28,21 L28,36 L8,43 L8,63 L24,70 L24,90 L12,97 L12,120" stroke="var(--amber-soft)" stroke-width="1.5" fill="none" opacity=".85"/>
+          <circle cx="17" cy="60" r="4" fill="var(--amber)"/>
+        </svg>
+        <div style="flex:1 1 240px">
+          <h3 style="font-family:var(--serif);font-size:1.2rem">眠りの深さで、探す</h3>
+          <p style="color:var(--moon-dim);margin-top:8px;font-size:.92rem">就寝前から目覚めまで、6つの深さで睡眠グッズを選べます。</p>
+        </div>
+      </div>
+      <a class="btn btn-primary" style="margin-top:20px;align-self:flex-start" href="/depth.html" onclick="track('depth_link_from_top',{})">深さで選んでみる →</a>
+    </article>
   </div>
 </section>
 
@@ -784,6 +804,7 @@ function renderResult(forceK1,forceK2){
       </div>
       ${shareHtml}
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
+      <p style="margin-top:14px"><a href="/depth.html" style="color:var(--amber-soft);font-size:.82rem" onclick="track('depth_link_from_top',{source:'quiz_result'})">もっと深く知りたい方はこちら →</a></p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
     track(forceK1 ? 'quiz_restore' : 'quiz_complete', { sleep_type: typeParam, is_combo: true });
@@ -802,6 +823,7 @@ function renderResult(forceK1,forceK2){
       </div>
       ${shareHtml}
       <p class="result-note">※ この診断は生活環境を整理するための目安であり、医学的な診断ではありません。つらい状態が2週間以上続く場合は、医療機関への相談を優先してください。</p>
+      <p style="margin-top:14px"><a href="/depth.html" style="color:var(--amber-soft);font-size:.82rem" onclick="track('depth_link_from_top',{source:'quiz_result'})">もっと深く知りたい方はこちら →</a></p>
       <button class="restart" type="button" id="restart">もう一度診断する</button>`;
     quizBody.innerHTML=bodyHtml;
     track(forceK1 ? 'quiz_restore' : 'quiz_complete', { sleep_type: typeParam, is_combo: false });

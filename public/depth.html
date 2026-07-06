@@ -65,18 +65,18 @@ function track(eventName, params){
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --c-dusk:#131A33;      /* 宵 */
-    --c-night:#0B1026;     /* 深宵 */
+    --c-dusk:#12162E;      /* 宵(A: bg-2) */
+    --c-night:#0C0F22;     /* 深宵(A: bg-1) */
     --c-abyss:#05060F;     /* 深淵 */
-    --c-dawn:#2E3A5C;      /* 暁 */
-    --c-moon:#A7C7FF;      /* 月光 */
-    --c-lamp:#E8C99A;      /* 灯り */
-    --c-text:#E9ECF5;
-    --c-text-dim:#8B93AD;
-    --font-display:'Zen Old Mincho',serif;
+    --c-dawn:#232A52;      /* 暁(Aの色相系統に統一) */
+    --c-glow:#E8C9A0;      /* 灯り(A: accent-gold。旧c-moonの青を統合) */
+    --c-lamp:#E8C9A0;      /* 灯り(Aの正確な値に統一) */
+    --c-text:#F3EFE4;      /* Aの本文色に統一 */
+    --c-text-dim:#B9B6AC;  /* Aのtext-mutedに統一 */
+    --font-display:'Shippori Mincho',serif;
     --font-body:'Zen Kaku Gothic New',sans-serif;
     --font-mono:'Space Mono',monospace;
   }
@@ -94,7 +94,7 @@ function track(eventName, params){
   #bg3d{position:fixed;inset:0;z-index:0;pointer-events:none}
   /* WebGLフォールバック */
   .no-webgl #bg3d{display:none}
-  .no-webgl body{background:linear-gradient(180deg,#131A33,#05060F)}
+  .no-webgl body{background:linear-gradient(180deg,#12162E,#05060F)}
 
   /* ===== 深度ゲージ(シグネチャー要素) ===== */
   #gauge{
@@ -103,13 +103,13 @@ function track(eventName, params){
     display:flex;flex-direction:column;align-items:flex-start;
   }
   #gauge svg{height:100%;width:34px;overflow:visible}
-  #gauge .track{stroke:rgba(167,199,255,.18);stroke-width:1.5;fill:none}
-  #gauge .hypno{stroke:var(--c-moon);stroke-width:1.5;fill:none;opacity:.85}
-  #gauge .marker{fill:var(--c-lamp);r:4;filter:drop-shadow(0 0 6px var(--c-lamp))}
+  #gauge .track{stroke:rgba(232,201,160,.22);stroke-width:1.5;fill:none}
+  #gauge .hypno{stroke:var(--c-glow);stroke-width:1.5;fill:none;opacity:.85}
+  #gauge .marker{fill:var(--c-glow);r:4;filter:drop-shadow(0 0 6px var(--c-glow))}
   #gaugeLabel{
     position:absolute;left:44px;top:0;
     font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
-    color:var(--c-moon);white-space:nowrap;
+    color:var(--c-glow);white-space:nowrap;
     transform:translateY(-50%);transition:top .15s ease-out;
   }
   #gaugeLabel .stage{
@@ -134,9 +134,9 @@ function track(eventName, params){
 
   .depth-tag{
     font-family:var(--font-mono);font-size:12px;letter-spacing:.25em;
-    color:var(--c-moon);margin-bottom:18px;
+    color:var(--c-glow);margin-bottom:18px;
   }
-  .depth-tag::before{content:"";display:inline-block;width:28px;height:1px;background:var(--c-moon);vertical-align:middle;margin-right:12px;opacity:.5}
+  .depth-tag::before{content:"";display:inline-block;width:28px;height:1px;background:var(--c-glow);vertical-align:middle;margin-right:12px;opacity:.5}
   h1,h2{font-family:var(--font-display);font-weight:700;letter-spacing:.06em}
   h1{font-size:clamp(30px,5.4vw,58px);line-height:1.5}
   h2{font-size:clamp(22px,3.4vw,36px);line-height:1.6;margin-bottom:14px}
@@ -155,7 +155,7 @@ function track(eventName, params){
   }
   #hero .scroll-hint::after{
     content:"";width:1px;height:52px;
-    background:linear-gradient(180deg,var(--c-moon),transparent);
+    background:linear-gradient(180deg,var(--c-glow),transparent);
     animation:sink 2.6s ease-in-out infinite;
   }
   @keyframes sink{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(14px);opacity:.3}}
@@ -164,8 +164,8 @@ function track(eventName, params){
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:44px;perspective:900px}
   .card{
     position:relative;border-radius:14px;padding:24px 22px 22px;
-    background:linear-gradient(160deg,rgba(167,199,255,.07),rgba(167,199,255,.02));
-    border:1px solid rgba(167,199,255,.16);
+    background:linear-gradient(160deg,rgba(232,201,160,.07),rgba(232,201,160,.02));
+    border:1px solid rgba(232,201,160,.16);
     transform-style:preserve-3d;
     transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
     will-change:transform;
@@ -173,11 +173,11 @@ function track(eventName, params){
     display:block;text-decoration:none;color:inherit;
   }
   .card:hover,.card:focus-visible{
-    border-color:rgba(232,201,154,.55);
-    box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 24px rgba(232,201,154,.08);
+    border-color:rgba(232,201,160,.55);
+    box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 24px rgba(232,201,160,.08);
   }
-  .card:focus-visible{outline:2px solid var(--c-lamp);outline-offset:3px}
-  .card .cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.28em;color:var(--c-lamp);margin-bottom:10px}
+  .card:focus-visible{outline:2px solid var(--c-glow);outline-offset:3px}
+  .card .cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.28em;color:var(--c-glow);margin-bottom:10px}
   .card .thumb{
     width:84px;height:84px;background:#fff;border-radius:10px;
     box-shadow:0 8px 22px rgba(0,0,0,.35);overflow:hidden;
@@ -189,24 +189,24 @@ function track(eventName, params){
   .card p{font-size:13px;color:var(--c-text-dim);line-height:1.8;transform:translateZ(12px)}
   .card .price{font-family:var(--font-mono);font-size:12px;color:var(--c-lamp);margin-top:8px;transform:translateZ(12px)}
   .card .why{
-    margin-top:14px;padding-top:12px;font-size:12px;color:var(--c-moon);
-    border-top:1px dashed rgba(167,199,255,.22);
+    margin-top:14px;padding-top:12px;font-size:12px;color:var(--c-glow);
+    border-top:1px dashed rgba(232,201,160,.22);
   }
   .card .why b{font-weight:500;color:var(--c-text)}
 
   /* ===== 朝のセクション(浮上) ===== */
   #dawn{text-align:center;align-items:center}
-  #dawn h2{color:#F3EEDC}
+  #dawn h2{color:var(--c-text)}
   #dawn .lead{margin-left:auto;margin-right:auto}
   .cta{
     display:inline-block;margin-top:38px;padding:16px 46px;border-radius:999px;
     font-family:var(--font-display);font-size:16px;letter-spacing:.22em;
-    color:#1A2240;background:linear-gradient(120deg,#F3E7C8,#E8C99A);
+    color:#0C0F22;background:#D9A45F;
     text-decoration:none;border:none;
-    box-shadow:0 8px 34px rgba(232,201,154,.35);
+    box-shadow:0 8px 34px rgba(217,164,95,.35);
     transition:transform .3s,box-shadow .3s;
   }
-  .cta:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(232,201,154,.5)}
+  .cta:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(217,164,95,.5)}
   .cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
   footer{
@@ -248,7 +248,7 @@ function track(eventName, params){
     <div class="scroll-hint">DIVE</div>
   </section>
 
-  <section data-depth="0" data-stage="就寝前" data-min="+0 min" data-bg="#131A33">
+  <section data-depth="0" data-stage="就寝前" data-min="+0 min" data-bg="#12162E">
     <div class="depth-tag reveal">SURFACE ｜ 就寝前</div>
     <h2 class="reveal">灯りを落とす前の、ならし時間。</h2>
     <p class="lead reveal">眠りに入る前の30分は、体温と光を静かに下げていく時間。この時間帯に使うものから、眠りの質は始まります。</p>
@@ -272,7 +272,7 @@ function track(eventName, params){
     </div>
   </section>
 
-  <section data-depth="1" data-stage="入眠期 N1" data-min="+10 min" data-bg="#0E1430">
+  <section data-depth="1" data-stage="入眠期 N1" data-min="+10 min" data-bg="#0E1129">
     <div class="depth-tag reveal">N1 ｜ 入眠期</div>
     <h2 class="reveal">意識がほどけていく、最初の数分。</h2>
     <p class="lead reveal">うとうとと意識が遠のく入眠期。ここで首と後頭部を預ける場所が、その夜の潜り方を左右します。</p>
@@ -288,7 +288,7 @@ function track(eventName, params){
     </div>
   </section>
 
-  <section data-depth="2" data-stage="浅い眠り N2" data-min="+30 min" data-bg="#0B1026">
+  <section data-depth="2" data-stage="浅い眠り N2" data-min="+30 min" data-bg="#0C0F22">
     <div class="depth-tag reveal">N2 ｜ 浅い眠り</div>
     <h2 class="reveal">体温がゆっくり下がっていく層。</h2>
     <p class="lead reveal">眠りの大半を占める浅睡眠。寝床の中の温度と湿度——「寝床内気候」を整える寝具の出番です。</p>
@@ -336,7 +336,7 @@ function track(eventName, params){
     </div>
   </section>
 
-  <section data-depth="4" data-stage="レム睡眠" data-min="+90 min" data-bg="#111A3D">
+  <section data-depth="4" data-stage="レム睡眠" data-min="+90 min" data-bg="#161B38">
     <div class="depth-tag reveal">REM ｜ 浮上と夢</div>
     <h2 class="reveal">夢を見ながら、朝へ浮かんでいく。</h2>
     <p class="lead reveal">明け方に増えるレム睡眠。ここから先は、目覚めの準備の時間。香りと光が、浮上をやさしくします。</p>
@@ -360,7 +360,7 @@ function track(eventName, params){
     </div>
   </section>
 
-  <section id="dawn" data-depth="5" data-stage="起床" data-min="AM 6:30" data-bg="#2E3A5C">
+  <section id="dawn" data-depth="5" data-stage="起床" data-min="AM 6:30" data-bg="#232A52">
     <div class="depth-tag reveal" style="justify-content:center">SURFACE ｜ 朝</div>
     <h2 class="reveal">おかえりなさい、水面へ。</h2>
     <p class="lead reveal">あなたの眠りは、どの深さでつまずいていますか。7つの質問で、あなたの睡眠タイプと、いま必要な一つを診断します。</p>
@@ -380,7 +380,7 @@ function track(eventName, params){
   function hexToRgb(h){var n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
   function lerp(a,b,t){return a+(b-a)*t}
   var stops = sections.map(function(s){return{el:s,rgb:hexToRgb(s.dataset.bg)}});
-  var heroRgb = hexToRgb('#131A33');
+  var heroRgb = hexToRgb('#12162E');
   var currentBg = heroRgb.slice();
 
   /* ===== 深度ゲージ ===== */
@@ -478,7 +478,7 @@ function track(eventName, params){
 
   /* 月:点描のスフィア */
   var moonGeo = new THREE.SphereGeometry(2.1, 40, 40);
-  var moonMat = new THREE.PointsMaterial({color:0xA7C7FF, size:0.022, transparent:true, opacity:.85});
+  var moonMat = new THREE.PointsMaterial({color:0xE8C9A0, size:0.022, transparent:true, opacity:.85});
   var moon = new THREE.Points(moonGeo, moonMat);
   moon.position.set(3.4, 2.2, -3);
   scene.add(moon);
@@ -495,7 +495,7 @@ function track(eventName, params){
   }
   var pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
-  var pMat = new THREE.PointsMaterial({color:0xCBDEFF, size:.045, transparent:true, opacity:.55});
+  var pMat = new THREE.PointsMaterial({color:0xE8C9A0, size:.045, transparent:true, opacity:.55});
   var particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
 
@@ -523,7 +523,6 @@ function track(eventName, params){
     pMat.opacity = .55*(1 - depthProgress*.6);   /* 深淵で粒を消していく */
     moon.rotation.y += .0012;
     moonMat.opacity = .85*(1 - depthProgress*.9); /* 月は深く潜ると見えなくなる */
-    /* 暁で月光色→灯り色へ */
     camera.position.y = -depthProgress*1.2;
     renderer.render(scene, camera);
   }
