@@ -4,7 +4,8 @@ update_prices.py
 Somni (public/index.html) の商品カード内 keyword を使って
 楽天市場商品検索API（新API・2026年2月刷新版）を叩き、
 1) 実際の最安値レンジを price 欄に反映
-2) AFFILIATE_MAP（card()が優先参照する固定URL辞書）を更新
+2) 商品画像URL(500x500)を img フィールドに反映
+3) AFFILIATE_MAP（card()が優先参照する固定URL辞書）を更新
 するスクリプト。既存の Sillage 用パイプライン(fetch-rakuten-items.mjs)と
 同じ新APIエンドポイント・認証方式に合わせてある。
 
@@ -54,15 +55,29 @@ import urllib.request
 
 RAKUTEN_ENDPOINT = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20220601"
 SLEEP_SEC = 1.2
+MAX_RETRIES = 3
+
+
+def upsize_image(url: str | None, size: str = "500x500") -> str | None:
+    """楽天のサムネイルURLは末尾に ?_ex=128x128 等のサイズ指定が付くことが多い。
+    カード表示でぼやけないよう大きめのサイズに置換する。"""
+    if not url:
+        return None
+    if "_ex=" in url:
+        return re.sub(r"_ex=\d+x\d+", f"_ex={size}", url)
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}_ex={size}"
 
 
 def fetch_item(keyword: str, app_id: str, access_key: str, affiliate_id: str, origin: str) -> dict | None:
     """楽天商品検索APIを1件叩いて、最も関連度の高い商品情報を返す。失敗時はNone。
     sort=+itemPrice(価格順)にすると交換バンドや保護フィルムなど無関係な
-    安価アクセサリーが先頭に来てしまうため、標準(関連度)ソートを使う。"""
+    安価アクセサリーが先頭に来てしまうため、標準(関連度)ソートを使う。
+    429(レート制限)時はexponential backoffで最大MAX_RETRIES回リトライする。"""
     params = {
         "format": "json",
         "hits": 5,
+        "imageFlag": 1,
         "applicationId": app_id,
         "accessKey": access_key,
         "keyword": keyword,
@@ -76,15 +91,26 @@ def fetch_item(keyword: str, app_id: str, access_key: str, affiliate_id: str, or
     req.add_header("Origin", origin)
     req.add_header("User-Agent", "Mozilla/5.0 (compatible; SomniPriceBot/1.0)")
 
-    try:
-        with urllib.request.urlopen(req, timeout=15) as res:
-            data = json.loads(res.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", errors="ignore")
-        print(f"  [HTTP {e.code}] {keyword} -> {body[:200]}")
-        return None
-    except Exception as e:
-        print(f"  [ERROR] {keyword} -> {e}")
+    data = None
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=15) as res:
+                data = json.loads(res.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < MAX_RETRIES:
+                backoff = 2 ** (attempt + 1)
+                print(f"  [HTTP 429] {keyword} -> {backoff}秒待って再試行 ({attempt + 1}/{MAX_RETRIES})")
+                time.sleep(backoff)
+                continue
+            body = e.read().decode("utf-8", errors="ignore")
+            print(f"  [HTTP {e.code}] {keyword} -> {body[:200]}")
+            return None
+        except Exception as e:
+            print(f"  [ERROR] {keyword} -> {e}")
+            return None
+
+    if data is None:
         return None
 
     items = data.get("Items", [])
@@ -93,10 +119,12 @@ def fetch_item(keyword: str, app_id: str, access_key: str, affiliate_id: str, or
         return None
 
     item = items[0]["Item"]
+    image = (item.get("mediumImageUrls") or [{}])[0].get("imageUrl")
     return {
         "price": item.get("itemPrice"),
         "url": item.get("affiliateUrl") or item.get("itemUrl"),
         "name": item.get("itemName"),
+        "img": upsize_image(image),
     }
 
 
@@ -132,21 +160,41 @@ def main():
             results[kw] = item
         time.sleep(SLEEP_SEC)
 
-    # price フィールドを実勢価格に置換
-    def replace_price(match):
+    # price / img フィールドを実勢価格・実画像に置換
+    # 旧パターン \{cat:"[^"]+".*?\}\} は末尾が単一の "} である実際のブロック形状と
+    # 一致せず、一件もマッチしていなかった(price/imgが更新されないサイレントな
+    # バグだった)。notFor の終端までを明示的にマッチさせるよう修正。
+    def replace_fields(match):
         full_block = match.group(0)
         kw_match = re.search(r'keyword:"([^"]+)"', full_block)
         if not kw_match:
             return full_block
         kw = kw_match.group(1)
         item = results.get(kw)
-        if not item or not item.get("price"):
+        if not item:
             return full_block
-        new_price = f"約{item['price']:,}円"
-        return re.sub(r'price:"[^"]*"', f'price:"{new_price}"', full_block)
 
-    product_block_pattern = re.compile(r'\{cat:"[^"]+".*?\}\}', re.S)
-    html = product_block_pattern.sub(replace_price, html)
+        block = full_block
+        if item.get("price"):
+            new_price = f"約{item['price']:,}円"
+            block = re.sub(r'price:"[^"]*"', f'price:"{new_price}"', block, count=1)
+
+        if item.get("img"):
+            img_escaped = item["img"].replace('"', '\\"')
+            if re.search(r'\bimg:"[^"]*"', block):
+                block = re.sub(r'\bimg:"[^"]*"', f'img:"{img_escaped}"', block, count=1)
+            else:
+                block = re.sub(
+                    r'(keyword:"[^"]+",)',
+                    rf'\1 img:"{img_escaped}",',
+                    block,
+                    count=1,
+                )
+        return block
+
+    product_block_pattern = re.compile(r'\{cat:"[^"]+".*?notFor:"[^"]*"\}', re.S)
+    html, n_subs = product_block_pattern.subn(replace_fields, html)
+    print(f"\n商品ブロックのマッチ数: {n_subs}/{len(keywords)}(0件の場合は正規表現が壊れている可能性)")
 
     with open(args.html_path, "w", encoding="utf-8") as f:
         f.write(html)
@@ -157,8 +205,12 @@ def main():
     with open(map_path, "w", encoding="utf-8") as f:
         json.dump(affiliate_map, f, ensure_ascii=False, indent=2)
 
+    n_with_img = sum(1 for v in results.values() if v.get("img"))
+    img_rate = (n_with_img / len(results) * 100) if results else 0
+
     print(f"\n完了: {len(results)}/{len(keywords)} 件を取得")
-    print(f"価格を {args.html_path} に反映しました。")
+    print(f"画像取得成功率: {n_with_img}/{len(results)} ({img_rate:.1f}%)")
+    print(f"価格・画像を {args.html_path} に反映しました。")
     print(f"アフィリURLマップを {map_path} に出力しました。")
     if args.limit > 0:
         print("(--limit 指定のため一部のみ実行。全件実行する場合は --limit を外してください)")

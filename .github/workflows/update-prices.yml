@@ -1,0 +1,41 @@
+name: Update Rakuten Prices
+
+on:
+  schedule:
+    # 毎週月曜 03:00 JST (UTC前日18:00)
+    - cron: "0 18 * * 0"
+  workflow_dispatch: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run update_prices.py
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+          RAKUTEN_ORIGIN: https://somni.sanji-104vt.workers.dev/
+        run: python update_prices.py public/index.html
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet public/index.html; then
+            echo "No price/image changes."
+          else
+            git add public/index.html
+            git commit -m "chore: update Rakuten prices/images (scheduled)"
+            git push
+          fi
