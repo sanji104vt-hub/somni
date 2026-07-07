@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://somni.sanji-104vt.workers.dev/sitemap.xml
+
+# content signals
+search: yes
+ai-input: yes
+ai-train: no
