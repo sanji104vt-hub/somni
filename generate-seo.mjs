@@ -11,7 +11,7 @@
 // index.html 内に直接持つ設計のため、そこから抽出する構成に変更している。
 // 再実行しても JSON-LD は同じマーカーで置き換えるので重複しない。
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const CONFIG = {
   siteUrl: 'https://somni.sanji-104vt.workers.dev',
@@ -157,12 +157,34 @@ function injectIntoHtml(blocks) {
   writeFileSync(CONFIG.indexHtmlPath, html, 'utf-8');
 }
 
+function listHtmlSlugs(dir) {
+  // ディレクトリ内の *.html ファイル名(拡張子除く)を返す。ディレクトリが無い場合は空配列。
+  const abs = `${CONFIG.outDir}/${dir}`;
+  if (!existsSync(abs)) return [];
+  return readdirSync(abs)
+    .filter((f) => f.endsWith('.html'))
+    .map((f) => f.replace(/\.html$/, ''));
+}
+
 function buildSitemap(extraUrls = []) {
-  // 商品はページ内アンカーで独立URLを持たないため個別loc化しない。
-  // フェイクURLで水増ししないという方針に沿う。
+  // 商品ページ(/goods/*.html)とタイプページ(/type/*.html)は gen-goods.mjs / gen-types.mjs で
+  // 事前生成されているため、public 以下を走査して URL 化する。商品データが増減しても
+  // sitemap.xml が自動追従する(手動更新不要)。
+  const goodsSlugs = listHtmlSlugs('goods');
+  const typeSlugs = listHtmlSlugs('type');
   const urls = [
     { loc: `${CONFIG.siteUrl}/`, priority: '1.0', changefreq: 'weekly' },
     ...extraUrls,
+    ...typeSlugs.map((s) => ({
+      loc: `${CONFIG.siteUrl}/type/${s}.html`,
+      priority: '0.7',
+      changefreq: 'monthly',
+    })),
+    ...goodsSlugs.map((s) => ({
+      loc: `${CONFIG.siteUrl}/goods/${s}.html`,
+      priority: '0.6',
+      changefreq: 'monthly',
+    })),
   ];
   const body = urls
     .map(
@@ -172,6 +194,7 @@ function buildSitemap(extraUrls = []) {
     .join('\n');
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
   writeFileSync(`${CONFIG.outDir}/sitemap.xml`, xml, 'utf-8');
+  console.log(`sitemap.xml: total URLs=${urls.length} (goods=${goodsSlugs.length} / type=${typeSlugs.length} / extra=${extraUrls.length + 1})`);
 }
 
 function buildRobotsTxt() {
