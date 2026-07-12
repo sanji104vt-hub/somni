@@ -16,7 +16,7 @@ Somni (public/index.html) の商品カード内 keyword を使って
      RAKUTEN_ACCESS_KEY    アクセスキー（pk_... 、秘密情報）
      RAKUTEN_AFFILIATE_ID  アフィリエイトID
      RAKUTEN_ORIGIN        アプリ登録した「許可されたWebサイト」
-                            (例 https://somni.sanji-104vt.workers.dev/)
+                            (例 https://somni.asutelu.com/)
 
 2. ★ Origin ヘッダの完全一致に注意 ★
    楽天の新APIは、アプリ登録時に設定した「利用サイトURL」と
@@ -33,7 +33,7 @@ Somni (public/index.html) の商品カード内 keyword を使って
 $ export RAKUTEN_APP_ID="..."
 $ export RAKUTEN_ACCESS_KEY="pk_..."
 $ export RAKUTEN_AFFILIATE_ID="..."
-$ export RAKUTEN_ORIGIN="https://somni.sanji-104vt.workers.dev/"
+$ export RAKUTEN_ORIGIN="https://somni.asutelu.com/"
 
 # まず1〜2件だけ疎通テスト:
 $ py update_prices.py public/index.html --limit 2

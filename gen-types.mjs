@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, rmSync } from 'node
 import { createHash } from 'node:crypto';
 
 const CONFIG = {
-  siteUrl: 'https://somni.sanji-104vt.workers.dev',
+  siteUrl: 'https://somni.asutelu.com',
   indexHtmlPath: './public/index.html',
   outDir: './public/type',
   perCategoryLimit: 6,

@@ -14,13 +14,13 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 const CONFIG = {
-  siteUrl: 'https://somni.sanji-104vt.workers.dev',
+  siteUrl: 'https://somni.asutelu.com',
   indexHtmlPath: './public/index.html',
   outDir: './public',
   extraSitemapUrls: [
-    { loc: 'https://somni.sanji-104vt.workers.dev/depth.html', priority: '0.8', changefreq: 'monthly' },
-    { loc: 'https://somni.sanji-104vt.workers.dev/column/nell-vs-koala.html', priority: '0.7', changefreq: 'monthly' },
-    { loc: 'https://somni.sanji-104vt.workers.dev/column/hitsuji-kokai.html', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/depth.html', priority: '0.8', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/nell-vs-koala.html', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/hitsuji-kokai.html', priority: '0.7', changefreq: 'monthly' },
   ],
 };
 

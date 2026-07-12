@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://somni.sanji-104vt.workers.dev/sitemap.xml
+Sitemap: https://somni.asutelu.com/sitemap.xml
 
 # content signals
 search: yes
