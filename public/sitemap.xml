@@ -21,6 +21,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://somni.asutelu.com/column/white-noise-gyakukouka</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://somni.asutelu.com/column/tempur-natsu-koukai</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://somni.asutelu.com/goods/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

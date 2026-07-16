@@ -21,6 +21,8 @@ const CONFIG = {
     { loc: 'https://somni.asutelu.com/depth', priority: '0.8', changefreq: 'monthly' },
     { loc: 'https://somni.asutelu.com/column/nell-vs-koala', priority: '0.7', changefreq: 'monthly' },
     { loc: 'https://somni.asutelu.com/column/hitsuji-kokai', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/white-noise-gyakukouka', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/tempur-natsu-koukai', priority: '0.7', changefreq: 'monthly' },
   ],
 };
 
