@@ -325,8 +325,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(12,15,34,.88);backdrop-f
 .thumb{width:100%;aspect-ratio:1;background:#fff;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center}.thumb img{width:100%;height:100%;object-fit:contain;padding:8px}.cat{font-size:.64rem;letter-spacing:.18em;color:var(--lavender)}.item h3{font-size:.92rem}.brand{font-size:.72rem;color:var(--moon-dim)}.price{font-family:var(--serif);font-size:.86rem;color:var(--amber-soft)}.honest{font-size:.75rem;color:var(--moon-dim);border-left:2px solid var(--lavender);padding-left:8px}
 .back{display:inline-block;margin:46px 0 0;text-decoration:none}
 footer{border-top:1px solid var(--line);padding:36px 0 60px;margin-top:60px;font-size:.78rem;color:var(--moon-dim)}footer .policy{max-width:720px;line-height:2;margin-bottom:16px}
-@media(max-width:680px){.nav-links a:not(:first-child){display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item{padding:10px}.item h3{font-size:.82rem}.honest{display:none}}
-@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.wrap{padding:0 14px}}
+@media(max-width:680px){.nav-links a:not(:first-child){display:none}.grid{grid-template-columns:1fr;gap:12px}.item{padding:12px}.item h3{font-size:.9rem}.wrap{padding:0 14px}}
 </style>
 </head>
 <body>
