@@ -50,8 +50,9 @@ function esc(s) {
 function renderPage(typeKey, type, groupedProducts) {
   const typeSlug = typeKey.toLowerCase();
   const cleanTypeName = type.name.replace(/[^\S ]/g, '').trim(); // 絵文字も含めて残す
-  const title = `${cleanTypeName} のあなたへ | Somni 睡眠タイプ別ガイド`;
-  const description = `${type.cause}`.slice(0, 150);
+  const title = `${cleanTypeName}に向く快眠グッズと今夜の対策 | Somni`;
+  const description = `${cleanTypeName}の原因仮説と、今夜からできる対策、相性のよい快眠グッズを紹介。${type.cause}`.slice(0, 155);
+  const visibleProducts = type.cats.flatMap(cat => (groupedProducts.get(cat) || []).slice(0, CONFIG.perCategoryLimit));
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -60,6 +61,27 @@ function renderPage(typeKey, type, groupedProducts) {
       { '@type': 'ListItem', position: 2, name: '睡眠タイプ別ガイド', item: `${CONFIG.siteUrl}/#quiz` },
       { '@type': 'ListItem', position: 3, name: cleanTypeName, item: `${CONFIG.siteUrl}/type/${typeSlug}` },
     ],
+  };
+  const collectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    url: `${CONFIG.siteUrl}/type/${typeSlug}`,
+    description,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: visibleProducts.length,
+      itemListElement: visibleProducts.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          image: p.img,
+          url: `${CONFIG.siteUrl}/goods/${p.slug}`,
+        },
+      })),
+    },
   };
 
   return `<!DOCTYPE html>
@@ -72,10 +94,11 @@ function renderPage(typeKey, type, groupedProducts) {
 <meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
 <link rel="canonical" href="${CONFIG.siteUrl}/type/${typeSlug}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="${esc(cleanTypeName)} のあなたへ | Somni">
+<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${CONFIG.siteUrl}/type/${typeSlug}">
 <meta property="og:site_name" content="Somni">
+<meta property="og:image" content="${CONFIG.siteUrl}/ogp.png">
 <meta name="theme-color" content="#12162e">
 
 <!-- Google tag (gtag.js) -->
@@ -95,6 +118,7 @@ function renderPage(typeKey, type, groupedProducts) {
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">${JSON.stringify(breadcrumbJsonLd)}</script>
+<script type="application/ld+json">${JSON.stringify(collectionJsonLd)}</script>
 
 <style>
 :root{

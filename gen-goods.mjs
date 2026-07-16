@@ -63,6 +63,7 @@ function renderPage(p, relatedProducts) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: p.name,
+    url: `${CONFIG.siteUrl}/goods/${p.slug}`,
     image: p.img,
     brand: { '@type': 'Brand', name: p.brand },
     category: p.cat,
@@ -72,7 +73,6 @@ function renderPage(p, relatedProducts) {
       price: price || undefined,
       priceCurrency: 'JPY',
       url: rakutenUrl,
-      availability: 'https://schema.org/InStock',
     },
   };
   const cleanedJsonLd = JSON.parse(JSON.stringify(productJsonLd));
@@ -81,12 +81,12 @@ function renderPage(p, relatedProducts) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${CONFIG.siteUrl}/` },
-      { '@type': 'ListItem', position: 2, name: p.cat, item: `${CONFIG.siteUrl}/#products` },
+      { '@type': 'ListItem', position: 2, name: '快眠グッズ一覧', item: `${CONFIG.siteUrl}/goods/` },
       { '@type': 'ListItem', position: 3, name: p.name, item: `${CONFIG.siteUrl}/goods/${p.slug}` },
     ],
   };
-  const title = `${p.name} | Somni`;
-  const description = `${p.name}(${p.brand})の紹介と「向かない人」まで正直に書きます。${p.good}`.slice(0, 150);
+  const title = `${p.name}の向く人・向かない人 | Somni`;
+  const description = `${p.name}(${p.brand})の特徴、価格目安${p.price}、向く人・向かない人を正直に紹介。${p.good} 向かない人: ${p.notFor}`.slice(0, 155);
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -97,7 +97,7 @@ function renderPage(p, relatedProducts) {
 <meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
 <link rel="canonical" href="${CONFIG.siteUrl}/goods/${p.slug}">
 <meta property="og:type" content="product">
-<meta property="og:title" content="${esc(p.name)} | Somni">
+<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${CONFIG.siteUrl}/goods/${p.slug}">
 <meta property="og:site_name" content="Somni">
@@ -186,14 +186,14 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
     <a class="logo" href="/">SOMNI<small>眠りの手引き</small></a>
     <nav class="nav-links" aria-label="メイン">
       <a href="/#quiz">睡眠タイプ診断</a>
-      <a href="/#products">グッズを探す</a>
+      <a href="/goods/">グッズを探す</a>
       <a href="/#column">コラム</a>
     </nav>
   </div>
 </header>
 
 <div class="wrap">
-  <p class="crumbs"><a href="/">Somni</a> / <a href="/#products">${esc(p.cat)}</a> / ${esc(p.name)}</p>
+  <p class="crumbs"><a href="/">Somni</a> / <a href="/goods/">快眠グッズ一覧</a> / ${esc(p.name)}</p>
 
   <div class="product">
     <div class="thumb"><img src="${esc(p.img)}" alt="${esc(p.name)}" loading="eager" width="500" height="500"></div>
@@ -224,7 +224,7 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
     </div>
   </section>` : ''}
 
-  <a class="back-link" href="/#products">← すべてのグッズ一覧に戻る</a>
+  <a class="back-link" href="/goods/">← すべてのグッズ一覧に戻る</a>
 </div>
 
 <footer>
@@ -236,6 +236,115 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
 </body>
 </html>
 `;
+}
+
+function renderIndexPage(products, byCategory) {
+  const title = `快眠グッズ一覧｜枕・マットレス・睡眠改善グッズ${products.length}点 | Somni`;
+  const description = `枕・マットレス・寝具・光・音・スリープテックなど、詳細情報と実商品URLを確認できる快眠グッズ${products.length}点をカテゴリ別に掲載。向く人・向かない人まで正直に紹介します。`;
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${CONFIG.siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: '快眠グッズ一覧', item: `${CONFIG.siteUrl}/goods/` },
+    ],
+  };
+  const collectionJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Somni 快眠グッズ一覧',
+    url: `${CONFIG.siteUrl}/goods/`,
+    description,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: products.length,
+      itemListElement: products.map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          image: p.img,
+          url: `${CONFIG.siteUrl}/goods/${p.slug}`,
+        },
+      })),
+    },
+  };
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
+<link rel="canonical" href="${CONFIG.siteUrl}/goods/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:url" content="${CONFIG.siteUrl}/goods/">
+<meta property="og:site_name" content="Somni">
+<meta property="og:image" content="${CONFIG.siteUrl}/ogp.png">
+<meta name="theme-color" content="#12162e">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L6WT832DW8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L6WT832DW8');
+  function track(name, params){
+    if(typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">${JSON.stringify(collectionJsonLd)}</script>
+<script type="application/ld+json">${JSON.stringify(breadcrumbJsonLd)}</script>
+
+<style>
+:root{--night:#12162e;--night-deep:#0c0f22;--night-soft:#1b2140;--moon:#f3efe4;--moon-dim:#b9b6ac;--amber:#d9a45f;--amber-soft:#e8c9a0;--lavender:#8d93c8;--line:rgba(243,239,228,.14);--card:rgba(27,33,64,.72);--serif:'Shippori Mincho',serif;--sans:'Zen Kaku Gothic New',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:linear-gradient(180deg,var(--night-deep),var(--night) 30%,#161b38);color:var(--moon);line-height:1.8;letter-spacing:.02em;font-size:15.5px;min-height:100vh}
+a{color:var(--amber-soft)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.5}
+header{position:sticky;top:0;z-index:50;background:rgba(12,15,34,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}.logo{font-family:var(--serif);font-size:1.3rem;letter-spacing:.18em;color:var(--moon);text-decoration:none}.logo small{font-size:.62rem;letter-spacing:.3em;color:var(--lavender);display:block;line-height:1;margin-top:2px}.nav-links{display:flex;gap:22px;font-size:.82rem}.nav-links a{color:var(--moon-dim);text-decoration:none}.nav-links a:hover{color:var(--amber-soft)}
+.crumbs{font-size:.78rem;color:var(--moon-dim);padding:22px 0}.crumbs a{text-decoration:none}
+.hero{padding:26px 0 34px;border-bottom:1px solid var(--line)}.eyebrow{font-size:.7rem;letter-spacing:.24em;color:var(--amber);text-transform:uppercase}.hero h1{font-size:clamp(1.7rem,4vw,2.5rem);margin:10px 0}.hero .lead{max-width:760px;color:var(--moon-dim)}
+.cat-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.cat-nav a{font-size:.78rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 13px;color:var(--moon-dim)}.cat-nav a:hover{border-color:var(--amber);color:var(--amber-soft)}
+.cat-section{padding-top:40px;scroll-margin-top:70px}.cat-section h2{font-size:1.35rem;margin-bottom:16px}.cat-section h2 small{font-family:var(--sans);font-size:.72rem;color:var(--lavender);margin-left:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.item{display:flex;flex-direction:column;gap:9px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--moon);text-decoration:none;transition:border-color .15s,transform .15s}.item:hover,.item:focus-visible{border-color:var(--amber);transform:translateY(-2px)}
+.thumb{width:100%;aspect-ratio:1;background:#fff;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center}.thumb img{width:100%;height:100%;object-fit:contain;padding:8px}.cat{font-size:.64rem;letter-spacing:.18em;color:var(--lavender)}.item h3{font-size:.92rem}.brand{font-size:.72rem;color:var(--moon-dim)}.price{font-family:var(--serif);font-size:.86rem;color:var(--amber-soft)}.honest{font-size:.75rem;color:var(--moon-dim);border-left:2px solid var(--lavender);padding-left:8px}
+.back{display:inline-block;margin:46px 0 0;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:36px 0 60px;margin-top:60px;font-size:.78rem;color:var(--moon-dim)}footer .policy{max-width:720px;line-height:2;margin-bottom:16px}
+@media(max-width:680px){.nav-links a:not(:first-child){display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.item{padding:10px}.item h3{font-size:.82rem}.honest{display:none}}
+@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="logo" href="/">SOMNI<small>眠りの手引き</small></a><nav class="nav-links" aria-label="メイン"><a href="/goods/">グッズ一覧</a><a href="/#quiz">睡眠タイプ診断</a><a href="/#column">コラム</a></nav></div></header>
+<main class="wrap">
+  <p class="crumbs"><a href="/">Somni</a> / 快眠グッズ一覧</p>
+  <section class="hero">
+    <span class="eyebrow">Honest Picks Index</span>
+    <h1>快眠グッズ一覧</h1>
+    <p class="lead">画像・価格・実商品URLを確認できる${products.length}点を、カテゴリ別にまとめました。各商品ページでは、良いところだけでなく「向かない人」も確認できます。価格は変動するため、購入前にリンク先の最新情報をご確認ください。</p>
+    <nav class="cat-nav" aria-label="商品カテゴリ">${[...byCategory.keys()].map(cat => `<a href="#${encodeURIComponent(cat)}">${esc(cat)} (${byCategory.get(cat).length})</a>`).join('')}</nav>
+  </section>
+  ${[...byCategory.entries()].map(([cat, items]) => `<section class="cat-section" id="${esc(cat)}"><h2>${esc(cat)}<small>${items.length}点</small></h2><div class="grid">${items.map(p => `<a class="item" href="/goods/${p.slug}" onclick="track('product_detail_click',{source:'goods_index',category:'${esc(p.cat)}'})"><div class="thumb"><img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" width="280" height="280"></div><span class="cat">${esc(p.cat)}</span><h3>${esc(p.name)}</h3><span class="brand">${esc(p.brand)}</span><span class="price">価格目安 ${esc(p.price)}</span><p class="honest">向かない人: ${esc(p.notFor)}</p></a>`).join('')}</div></section>`).join('')}
+  <a class="back" href="/">← 睡眠タイプ診断とトップページへ</a>
+</main>
+<footer><div class="wrap"><p class="policy"><strong>このサイトの方針:</strong> Somniは医療情報を提供するサイトではありません。掲載しているのは、眠る環境を整えるための道具と考え方です。商品詳細ページにはアフィリエイトリンクを含みます。</p><p>&copy; 2026 Somni — 眠りの手引き</p></div></footer>
+</body>
+</html>`;
 }
 
 function main() {
@@ -279,7 +388,9 @@ function main() {
     count++;
   }
 
-  console.log(`gen-goods: 対象商品=${eligible.length}件 / 生成=${count}件`);
+  writeFileSync(`${CONFIG.outDir}/index.html`, renderIndexPage(eligible, byCategory), 'utf-8');
+
+  console.log(`gen-goods: 対象商品=${eligible.length}件 / 詳細ページ=${count}件 / 一覧ページ=1件`);
   console.log(`カテゴリ別内訳: ${[...byCategory.entries()].map(([k, v]) => `${k}=${v.length}`).join(', ')}`);
 }
 

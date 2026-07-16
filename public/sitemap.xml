@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://somni.asutelu.com/goods/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://somni.asutelu.com/type/a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -1,10 +1,9 @@
 // generate-seo.mjs
 // Somni ビルド時SEO強化スクリプト。
 // 役割: public/index.html 内の PRODUCTS 配列と AFFILIATE_MAP を読み取り、
-//   (1) カテゴリ別 Product/ItemList JSON-LD
-//   (2) BreadcrumbList
-//   (3) sitemap.xml
-//   (4) robots.txt
+//   (1) 商品詳細ページへつながる CollectionPage/ItemList JSON-LD
+//   (2) sitemap.xml
+//   (3) robots.txt
 // を生成し、index.html の </body> 直前へ構造化データを注入する。
 //
 // 元の指示書は data/products.json 前提だったが、SomniはPRODUCTS配列を
@@ -71,75 +70,28 @@ function parseAffiliateMap(html) {
   return new Function('return ' + mapText)();
 }
 
-function groupByCategory(products) {
-  const map = new Map();
-  for (const p of products) {
-    const cat = p.cat || 'その他';
-    if (!map.has(cat)) map.set(cat, []);
-    map.get(cat).push(p);
-  }
-  return map;
-}
-
-function priceToNumber(priceStr) {
-  // "約33,660円" -> "33660"
-  if (typeof priceStr !== 'string') return null;
-  const m = priceStr.match(/([\d,]+)/);
-  if (!m) return null;
-  const n = m[1].replace(/,/g, '');
-  return n;
-}
-
-function toProductSchema(p, affiliateMap) {
-  const price = priceToNumber(p.price);
-  const url = affiliateMap[p.keyword] ||
-    `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(p.keyword)}/`;
-  const schema = {
-    '@type': 'Product',
-    name: p.name,
-    image: p.img || undefined,
-    brand: p.brand ? { '@type': 'Brand', name: p.brand } : undefined,
-    category: p.cat,
-    offers: {
-      '@type': 'Offer',
-      price: price || undefined,
-      priceCurrency: 'JPY',
-      url,
-      availability: 'https://schema.org/InStock',
-    },
-  };
-  return JSON.parse(JSON.stringify(schema));
-}
-
-function buildItemListBlocks(grouped, affiliateMap) {
-  return [...grouped.entries()].map(([category, items]) => {
-    const itemList = {
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: `Somni | ${category} の快眠グッズ`,
-      itemListElement: items.slice(0, 50).map((p, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        item: toProductSchema(p, affiliateMap),
-      })),
-    };
-    return `<script type="application/ld+json">${JSON.stringify(itemList)}</script>`;
-  });
-}
-
-function buildBreadcrumb(categories) {
+function buildHomeCollectionSchema(products) {
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${CONFIG.siteUrl}/` },
-      ...categories.map((c, i) => ({
+    '@type': 'CollectionPage',
+    name: 'Somni 快眠グッズ一覧',
+    url: `${CONFIG.siteUrl}/`,
+    description: '睡眠タイプ診断と、向く人・向かない人まで分かる快眠グッズ一覧。',
+    mainEntity: {
+      '@type': 'ItemList',
+      name: 'Somni 商品詳細ページ',
+      numberOfItems: products.length,
+      itemListElement: products.map((p, i) => ({
         '@type': 'ListItem',
-        position: i + 2,
-        name: c,
-        item: `${CONFIG.siteUrl}/#${encodeURIComponent(c)}`,
+        position: i + 1,
+        item: {
+          '@type': 'Product',
+          name: p.name,
+          image: p.img,
+          url: `${CONFIG.siteUrl}/goods/${p.slug}`,
+        },
       })),
-    ],
+    },
   };
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
@@ -189,7 +141,7 @@ function listHtmlSlugs(dir) {
   const abs = `${CONFIG.outDir}/${dir}`;
   if (!existsSync(abs)) return [];
   return readdirSync(abs)
-    .filter((f) => f.endsWith('.html'))
+    .filter((f) => f.endsWith('.html') && f !== 'index.html')
     .map((f) => f.replace(/\.html$/, ''));
 }
 
@@ -202,6 +154,7 @@ function buildSitemap(extraUrls = []) {
   const urls = [
     { loc: `${CONFIG.siteUrl}/`, priority: '1.0', changefreq: 'weekly' },
     ...extraUrls,
+    { loc: `${CONFIG.siteUrl}/goods/`, priority: '0.8', changefreq: 'weekly' },
     ...typeSlugs.map((s) => ({
       loc: `${CONFIG.siteUrl}/type/${s}`,
       priority: '0.7',
@@ -242,17 +195,18 @@ function main() {
   const html = loadIndexHtml();
   const products = parseProducts(html);
   const affiliateMap = parseAffiliateMap(html);
-  const grouped = groupByCategory(products);
-  const categories = [...grouped.keys()];
-  const itemListBlocks = buildItemListBlocks(grouped, affiliateMap);
-  const breadcrumb = buildBreadcrumb(categories);
+  const eligible = products
+    .filter((p) => p.img && affiliateMap[p.keyword])
+    .map((p) => ({ ...p, slug: slugFromKeyword(p.keyword) }));
+  const categories = [...new Set(products.map((p) => p.cat))];
+  const homeCollection = buildHomeCollectionSchema(eligible);
 
   injectGoodsMap(products, affiliateMap);
-  injectIntoHtml([breadcrumb, ...itemListBlocks]);
+  injectIntoHtml([homeCollection]);
   buildSitemap(CONFIG.extraSitemapUrls);
   buildRobotsTxt();
 
-  console.log(`SEO生成完了: カテゴリ数=${categories.length} / 商品数=${products.length} / AFFILIATE_MAP=${Object.keys(affiliateMap).length}`);
+  console.log(`SEO生成完了: カテゴリ数=${categories.length} / 商品数=${products.length} / 詳細ページ=${eligible.length}`);
   console.log(`カテゴリ: ${categories.join(', ')}`);
 }
 
