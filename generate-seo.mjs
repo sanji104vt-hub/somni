@@ -12,15 +12,16 @@
 // 再実行しても JSON-LD は同じマーカーで置き換えるので重複しない。
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const CONFIG = {
   siteUrl: 'https://somni.asutelu.com',
   indexHtmlPath: './public/index.html',
   outDir: './public',
   extraSitemapUrls: [
-    { loc: 'https://somni.asutelu.com/depth.html', priority: '0.8', changefreq: 'monthly' },
-    { loc: 'https://somni.asutelu.com/column/nell-vs-koala.html', priority: '0.7', changefreq: 'monthly' },
-    { loc: 'https://somni.asutelu.com/column/hitsuji-kokai.html', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/depth', priority: '0.8', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/nell-vs-koala', priority: '0.7', changefreq: 'monthly' },
+    { loc: 'https://somni.asutelu.com/column/hitsuji-kokai', priority: '0.7', changefreq: 'monthly' },
   ],
 };
 
@@ -157,6 +158,32 @@ function injectIntoHtml(blocks) {
   writeFileSync(CONFIG.indexHtmlPath, html, 'utf-8');
 }
 
+function slugFromKeyword(keyword) {
+  return createHash('md5').update(keyword).digest('hex').slice(0, 10);
+}
+
+function injectGoodsMap(products, affiliateMap) {
+  let html = readFileSync(CONFIG.indexHtmlPath, 'utf-8');
+  const markerStart = '// GOODS-MAP:START';
+  const markerEnd = '// GOODS-MAP:END';
+  const entries = products
+    .filter((p) => p.img && affiliateMap[p.keyword])
+    .map((p) => [p.keyword, `/goods/${slugFromKeyword(p.keyword)}`]);
+  const mapText = JSON.stringify(Object.fromEntries(entries), null, 2);
+  const payload = `${markerStart}\nconst GOODS_MAP = ${mapText};\n${markerEnd}`;
+
+  if (html.includes(markerStart) && html.includes(markerEnd)) {
+    const re = new RegExp(`${markerStart}[\\s\\S]*?${markerEnd}`);
+    html = html.replace(re, payload);
+  } else {
+    const anchor = 'function rakutenUrl(k){';
+    if (!html.includes(anchor)) throw new Error('GOODS_MAP の挿入位置が見つかりません');
+    html = html.replace(anchor, `${payload}\n${anchor}`);
+  }
+  writeFileSync(CONFIG.indexHtmlPath, html, 'utf-8');
+  console.log(`GOODS_MAP: ${entries.length}件`);
+}
+
 function listHtmlSlugs(dir) {
   // ディレクトリ内の *.html ファイル名(拡張子除く)を返す。ディレクトリが無い場合は空配列。
   const abs = `${CONFIG.outDir}/${dir}`;
@@ -176,12 +203,12 @@ function buildSitemap(extraUrls = []) {
     { loc: `${CONFIG.siteUrl}/`, priority: '1.0', changefreq: 'weekly' },
     ...extraUrls,
     ...typeSlugs.map((s) => ({
-      loc: `${CONFIG.siteUrl}/type/${s}.html`,
+      loc: `${CONFIG.siteUrl}/type/${s}`,
       priority: '0.7',
       changefreq: 'monthly',
     })),
     ...goodsSlugs.map((s) => ({
-      loc: `${CONFIG.siteUrl}/goods/${s}.html`,
+      loc: `${CONFIG.siteUrl}/goods/${s}`,
       priority: '0.6',
       changefreq: 'monthly',
     })),
@@ -220,6 +247,7 @@ function main() {
   const itemListBlocks = buildItemListBlocks(grouped, affiliateMap);
   const breadcrumb = buildBreadcrumb(categories);
 
+  injectGoodsMap(products, affiliateMap);
   injectIntoHtml([breadcrumb, ...itemListBlocks]);
   buildSitemap(CONFIG.extraSitemapUrls);
   buildRobotsTxt();

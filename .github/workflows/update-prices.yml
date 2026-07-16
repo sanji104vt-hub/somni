@@ -28,14 +28,20 @@ jobs:
           RAKUTEN_ORIGIN: https://somni.asutelu.com/
         run: python update_prices.py public/index.html
 
+      - name: Regenerate product pages and SEO files
+        run: |
+          node gen-goods.mjs
+          node gen-types.mjs
+          node generate-seo.mjs
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet public/index.html; then
-            echo "No price/image changes."
+          if git diff --quiet public; then
+            echo "No price/image or generated-page changes."
           else
-            git add public/index.html
-            git commit -m "chore: update Rakuten prices/images (scheduled)"
+            git add public
+            git commit -m "chore: update Rakuten prices and generated pages (scheduled)"
             git push
           fi

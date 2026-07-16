@@ -58,7 +58,7 @@ function renderPage(typeKey, type, groupedProducts) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${CONFIG.siteUrl}/` },
       { '@type': 'ListItem', position: 2, name: '睡眠タイプ別ガイド', item: `${CONFIG.siteUrl}/#quiz` },
-      { '@type': 'ListItem', position: 3, name: cleanTypeName, item: `${CONFIG.siteUrl}/type/${typeSlug}.html` },
+      { '@type': 'ListItem', position: 3, name: cleanTypeName, item: `${CONFIG.siteUrl}/type/${typeSlug}` },
     ],
   };
 
@@ -70,11 +70,11 @@ function renderPage(typeKey, type, groupedProducts) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
-<link rel="canonical" href="${CONFIG.siteUrl}/type/${typeSlug}.html">
+<link rel="canonical" href="${CONFIG.siteUrl}/type/${typeSlug}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(cleanTypeName)} のあなたへ | Somni">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${CONFIG.siteUrl}/type/${typeSlug}.html">
+<meta property="og:url" content="${CONFIG.siteUrl}/type/${typeSlug}">
 <meta property="og:site_name" content="Somni">
 <meta name="theme-color" content="#12162e">
 
@@ -85,6 +85,9 @@ function renderPage(typeKey, type, groupedProducts) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-L6WT832DW8');
+  function track(name, params){
+    if(typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -193,7 +196,7 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
       <h3 class="cat-title">${esc(cat)}</h3>
       <div class="grid">
         ${items.slice(0, CONFIG.perCategoryLimit).map(p => `
-        <a href="/goods/${p.slug}.html">
+        <a href="/goods/${p.slug}" onclick="track('product_detail_click',{source:'type_page',sleep_type:'${typeKey}',category:'${esc(p.cat)}'})">
           <div class="thumb"><img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" width="240" height="240"></div>
           <span class="g-cat">${esc(p.cat)}</span>
           <div class="g-name">${esc(p.name)}</div>

@@ -82,7 +82,7 @@ function renderPage(p, relatedProducts) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${CONFIG.siteUrl}/` },
       { '@type': 'ListItem', position: 2, name: p.cat, item: `${CONFIG.siteUrl}/#products` },
-      { '@type': 'ListItem', position: 3, name: p.name, item: `${CONFIG.siteUrl}/goods/${p.slug}.html` },
+      { '@type': 'ListItem', position: 3, name: p.name, item: `${CONFIG.siteUrl}/goods/${p.slug}` },
     ],
   };
   const title = `${p.name} | Somni`;
@@ -95,11 +95,11 @@ function renderPage(p, relatedProducts) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q">
-<link rel="canonical" href="${CONFIG.siteUrl}/goods/${p.slug}.html">
+<link rel="canonical" href="${CONFIG.siteUrl}/goods/${p.slug}">
 <meta property="og:type" content="product">
 <meta property="og:title" content="${esc(p.name)} | Somni">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${CONFIG.siteUrl}/goods/${p.slug}.html">
+<meta property="og:url" content="${CONFIG.siteUrl}/goods/${p.slug}">
 <meta property="og:site_name" content="Somni">
 <meta property="og:image" content="${esc(p.img)}">
 <meta name="theme-color" content="#12162e">
@@ -111,6 +111,9 @@ function renderPage(p, relatedProducts) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-L6WT832DW8');
+  function track(name, params){
+    if(typeof window.gtag === 'function') window.gtag('event', name, params || {});
+  }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,7 +203,7 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
       <p class="brand">${esc(p.brand)}</p>
       <p class="price">価格目安 ${esc(p.price)}</p>
       <div class="tags">${(p.tags||[]).map(t=>`<i>#${esc(t)}</i>`).join('')}</div>
-      <div class="cta-row"><a class="btn btn-primary" href="${esc(rakutenUrl)}" target="_blank" rel="nofollow sponsored noopener">楽天で最新価格を見る →</a></div>
+      <div class="cta-row"><a class="btn btn-primary" href="${esc(rakutenUrl)}" target="_blank" rel="nofollow sponsored noopener" onclick="track('product_click',{source:'goods_page',category:'${esc(p.cat)}'})">楽天で最新価格を見る →</a></div>
     </div>
   </div>
 
@@ -217,7 +220,7 @@ footer .policy{max-width:640px;line-height:2;margin-bottom:16px}
   ${relatedProducts.length ? `<section>
     <h2>同じカテゴリの他の選択肢</h2>
     <div class="related">
-      ${relatedProducts.map(r => `<a href="/goods/${r.slug}.html"><span class="r-cat">${esc(r.cat)}</span><div class="r-name">${esc(r.name)}</div><div class="r-brand">${esc(r.brand)}</div></a>`).join('')}
+      ${relatedProducts.map(r => `<a href="/goods/${r.slug}" onclick="track('product_detail_click',{source:'related_goods',category:'${esc(r.cat)}'})"><span class="r-cat">${esc(r.cat)}</span><div class="r-name">${esc(r.name)}</div><div class="r-brand">${esc(r.brand)}</div></a>`).join('')}
     </div>
   </section>` : ''}
 

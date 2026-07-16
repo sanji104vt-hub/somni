@@ -12,6 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate product pages and SEO files
+        run: |
+          node gen-goods.mjs
+          node gen-types.mjs
+          node generate-seo.mjs
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
